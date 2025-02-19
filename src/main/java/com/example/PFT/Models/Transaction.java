@@ -1,13 +1,13 @@
 package com.example.PFT.Models;
 
 
+import com.example.PFT.Models.enums.TransactionType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.management.ConstructorParameters;
 import java.util.Date;
 
 @Data

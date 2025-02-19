@@ -13,11 +13,8 @@ import java.util.List;
 public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
-    @Autowired
-    private AccountRepository accountRepository;
 
     public List<Transaction> getAllTransactions(Long id){
-
         return transactionRepository.findTransactionsByAccount(id);
     }
 
@@ -25,5 +22,8 @@ public class TransactionService {
         System.out.println(transaction.toString());
         transactionRepository.save(transaction);
     }
+
+    //TODO: revert the transaction by returning the balance to the previous status
+    public void revertTransaction(Transaction transaction){}
 
 }

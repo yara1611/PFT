@@ -1,5 +1,6 @@
 package com.example.PFT.Models;
 
+import com.example.PFT.Models.enums.TransactionType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -21,6 +22,8 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountId;
 
+    @Column
+    private String name;
 
     @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -32,6 +35,9 @@ public class Account {
     @JsonManagedReference
     @OneToMany(mappedBy = "account", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Transaction> transactions;
+
+    @Column
+    private AccessType accountType;
 
 
 }

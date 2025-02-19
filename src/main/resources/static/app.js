@@ -1,4 +1,4 @@
-fetch("http://localhost:8080/v1/users/all")
+/*fetch("http://localhost:8080/v1/users/all")
   .then(response => {
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -18,4 +18,9 @@ fetch("http://localhost:8080/v1/users/all")
         list.appendChild(li)
     });
     document.body.appendChild(list);
-  }
+  }*/
+
+const title = document.querySelector("#input-title");
+title.addEventListener("input",function(e){
+console.log(title.value)
+})
