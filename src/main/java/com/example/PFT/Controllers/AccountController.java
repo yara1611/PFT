@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/v1/accounts")
@@ -20,24 +22,39 @@ public class AccountController {
     private TransactionService transactionService;
 
     @PostMapping("/addAccount")
-    public ResponseEntity<String> addAccount(@RequestParam String username, @RequestParam Double balance, @RequestParam String name){
+    public ResponseEntity<String> addAccount(@RequestParam String username, @RequestParam Double balance, @RequestParam(required = false) String name){
         accountService.addAccount(username,balance, name);
         return ResponseEntity.ok().body("Account \""+name+"\" is successfully added account to user: "+username);
     }
     @PutMapping("/makeDeposit")
-    public ResponseEntity<String> deposit(@RequestParam Long id, @RequestParam Double amount){
-        accountService.makeDeposit(id,amount, TransactionType.DEPOSIT);
-        return ResponseEntity.ok().body("Successfully deposited "+amount);
-    }
-    @PutMapping("/withdraw")
-    public ResponseEntity<String> withdraw(@RequestParam Long id, @RequestParam Double amount){
+    public ResponseEntity<Map<String, Object>> deposit(@RequestParam Long id, @RequestParam Double amount) {
+        Map<String, Object> response = new HashMap<>();
         try {
-            accountService.makeDeposit(id,amount, TransactionType.WITHDRAW);
+            accountService.makeDeposit(id, amount, TransactionType.DEPOSIT);
+            response.put("status", "success");
+            response.put("balance", accountService.displayBalance(id)); // Assuming it returns balance
+            return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            response.put("status", "error");
+            response.put("message", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
         }
-        return ResponseEntity.ok().body("Successfully withdrawn "+amount);
+    }
 
+    
+    @PutMapping("/withdraw")
+    public ResponseEntity<Map<String, Object>> withdraw(@RequestParam Long id, @RequestParam Double amount) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            accountService.makeDeposit(id, amount, TransactionType.WITHDRAW);
+            response.put("status", "success");
+            response.put("balance", accountService.displayBalance(id)); // Assuming it returns balance
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            response.put("status", "error");
+            response.put("message", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
     }
 
     @GetMapping("/allTransactions")

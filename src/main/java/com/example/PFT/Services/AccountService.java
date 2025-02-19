@@ -32,7 +32,7 @@ public class AccountService {
 
         Account account=new Account();
 
-        account.setName(name.isEmpty()? "New Account":name);
+        account.setName(name==null? "New Account":name);
         account.setUser(user);
         account.setBalance(balance);
         accountRepository.save(account);
@@ -65,6 +65,12 @@ public class AccountService {
 
     public void deleteAccount(Account account){
         accountRepository.delete(account);
+    }
+
+    public String displayBalance(Long accountID){
+         Account account = accountRepository.findById(accountID)
+                .orElseThrow(() -> new IllegalStateException("Account with id: " + accountID + " is not found"));
+         return account.getBalance().toString();
     }
 
 }

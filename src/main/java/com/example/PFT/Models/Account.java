@@ -26,7 +26,7 @@ public class Account {
     private String name;
 
     @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     @Column
@@ -35,7 +35,6 @@ public class Account {
     @JsonManagedReference
     @OneToMany(mappedBy = "account", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Transaction> transactions;
-
     @Column
     private AccessType accountType;
 
