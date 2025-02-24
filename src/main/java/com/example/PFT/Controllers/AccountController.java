@@ -61,4 +61,6 @@ public class AccountController {
     public List<Transaction> getTrans(@RequestParam Long accountId){
         return transactionService.getAllTransactions(accountId);
     }
+
+    //TODO Delete account
 }

@@ -59,6 +59,8 @@ public class AccountService {
 
        //make a logger later
         System.out.println("LOG:");
+
+       //TODO add category
         transactionService.logTransaction(new Transaction(account,amount, type));
         accountRepository.save(account);
     }
