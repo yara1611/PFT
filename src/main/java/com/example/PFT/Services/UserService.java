@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class UserService {
@@ -30,10 +30,7 @@ public class UserService {
     }
 
     public boolean checkPass(User user, String password){
-        if(user.getPassword().equals(password)){
-            return true;
-        }
-        return false;
+        return user.getPassword().equals(password);
     }
 
     public void editUser(Long userId, User updatedUser) {

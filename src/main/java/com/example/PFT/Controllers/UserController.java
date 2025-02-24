@@ -1,8 +1,7 @@
 package com.example.PFT.Controllers;
 
-import com.example.PFT.Models.Transaction;
+
 import com.example.PFT.Models.User;
-import com.example.PFT.Services.TransactionService;
 import com.example.PFT.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +35,9 @@ public class UserController {
         userService.changePassword(userId,newPass);
         return ResponseEntity.ok().body("Password is successfully updated");
     }
+
+    //TODO DeleteUser
+
     //TODO LogIn
     @GetMapping("/login")
     public ResponseEntity<String> login (@RequestBody String username, @RequestBody String Password){
