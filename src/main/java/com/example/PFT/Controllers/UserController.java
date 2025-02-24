@@ -31,8 +31,21 @@ public class UserController {
     }
 
     //TODO change password
+    @PutMapping("/changePassword")
+    public ResponseEntity<String> editUser(@RequestParam Long userId, @RequestBody String newPass){
+        userService.changePassword(userId,newPass);
+        return ResponseEntity.ok().body("Password is successfully updated");
+    }
     //TODO LogIn
-
+    @GetMapping("/login")
+    public ResponseEntity<String> login (@RequestBody String username, @RequestBody String Password){
+        User user=userService.getUserByUsername(username);
+        boolean checkPass = userService.checkPass(user,Password);
+        if(!checkPass){
+            return ResponseEntity.badRequest().body("Wrong username or password");
+        }
+        return ResponseEntity.ok().body("User "+username+" successfully Logged in");
+    }
     //Admin Stuff
     @GetMapping("/allUsers")
     public List<User> getUsers(){

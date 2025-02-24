@@ -25,6 +25,16 @@ public class UserService {
     public List<User> getUsers() {
         return userRepository.findAll();
     }
+    public User getUserByUsername(String username){
+        return userRepository.findUserByUsername(username);
+    }
+
+    public boolean checkPass(User user, String password){
+        if(user.getPassword().equals(password)){
+            return true;
+        }
+        return false;
+    }
 
     public void editUser(Long userId, User updatedUser) {
         User existingUser = userRepository.findById(userId)
