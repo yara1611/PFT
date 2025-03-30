@@ -25,13 +25,17 @@ public class TransactionService {
     }
 
     public double revertTransaction(Long accountID){
-       List<Transaction> transactions = transactionRepository.findTransactionsByAccount(accountID);
-       Transaction lastTransaction = transactions.get(transactions.size()-1);
-       if(lastTransaction.getTransactionType()== TransactionType.DEPOSIT){
-           return -1*lastTransaction.getAmount();
-       }else{
-           return lastTransaction.getAmount();
-       }
+        List<Transaction> transactions = transactionRepository.findTransactionsByAccount(accountID);
+        try{
+            Transaction lastTransaction = transactions.get(transactions.size()-1);
+            if(lastTransaction.getTransactionType()== TransactionType.DEPOSIT){
+                return -1*lastTransaction.getAmount();
+            }else{
+                return lastTransaction.getAmount();
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException("No Previous Transactions");
+        }
     }
 
     //TODO:Filter transactions by date
