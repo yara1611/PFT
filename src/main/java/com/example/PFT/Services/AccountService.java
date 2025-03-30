@@ -25,7 +25,7 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
-    //make DTOs later
+    //TODO:make DTOs
     public void addAccount(String username, Double balance, String name){
         User user = Optional.ofNullable(userRepository.findUserByUsername(username))
                 .orElseThrow(() -> new IllegalStateException("User not found"));
@@ -38,8 +38,8 @@ public class AccountService {
         accountRepository.save(account);
     }
 
+    //TODO:Change Name
     public void makeDeposit(Long accountID, Double amount,TransactionType type){
-        //Account account = accountRepository.findById(accountID).get();
 
        Account account = accountRepository.findById(accountID)
                .orElseThrow(() -> new IllegalStateException("Account with id: " + accountID + " is not found"));
@@ -71,6 +71,15 @@ public class AccountService {
          Account account = accountRepository.findById(accountID)
                 .orElseThrow(() -> new IllegalStateException("Account with id: " + accountID + " is not found"));
          return account.getBalance().toString();
+    }
+
+    public void revertT(Long accountID){
+        double bal = transactionService.revertTransaction(accountID);
+        Account account = accountRepository.findById(accountID)
+                .orElseThrow(() -> new IllegalStateException("Account with id: " + accountID + " is not found"));
+        account.setBalance(account.getBalance()+bal);
+        transactionService.logTransaction(new Transaction(account,bal,TransactionType.REVERT));
+        accountRepository.save(account);
     }
 
 }

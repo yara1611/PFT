@@ -2,6 +2,7 @@ package com.example.PFT.Services;
 
 import com.example.PFT.Models.Account;
 import com.example.PFT.Models.Transaction;
+import com.example.PFT.Models.enums.TransactionType;
 import com.example.PFT.Repositories.AccountRepository;
 import com.example.PFT.Repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,16 @@ public class TransactionService {
         transactionRepository.save(transaction);
     }
 
-    //TODO: revert the transaction by returning the balance to the previous status
-    public void revertTransaction(Transaction transaction){}
+    public double revertTransaction(Long accountID){
+       List<Transaction> transactions = transactionRepository.findTransactionsByAccount(accountID);
+       Transaction lastTransaction = transactions.get(transactions.size()-1);
+       if(lastTransaction.getTransactionType()== TransactionType.DEPOSIT){
+           return -1*lastTransaction.getAmount();
+       }else{
+           return lastTransaction.getAmount();
+       }
+    }
+
+    //TODO:Filter transactions by date
 
 }

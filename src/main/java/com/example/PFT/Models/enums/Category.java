@@ -4,6 +4,6 @@ public enum Category {
     FOOD_DRINKS,
     TRANSPORTATION,
     GIFTS,
-    OUTING,
+    OUTINGS,
     DONATION
 }

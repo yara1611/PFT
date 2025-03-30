@@ -4,6 +4,7 @@ import com.example.PFT.Models.Transaction;
 import com.example.PFT.Models.enums.TransactionType;
 import com.example.PFT.Services.AccountService;
 import com.example.PFT.Services.TransactionService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,7 @@ public class AccountController {
         }
     }
 
-    
+
     @PutMapping("/withdraw")
     public ResponseEntity<Map<String, Object>> withdraw(@RequestParam Long id, @RequestParam Double amount) {
         Map<String, Object> response = new HashMap<>();
@@ -57,11 +58,22 @@ public class AccountController {
         }
     }
 
+    @GetMapping("/displayBalance")
+    public String displayBalance(@RequestParam Long accountId){
+        return accountService.displayBalance(accountId);
+    }
+
+    @Tag(name="Admin")
     @GetMapping("/allTransactions")
     public List<Transaction> getTrans(@RequestParam Long accountId){
         return transactionService.getAllTransactions(accountId);
     }
 
+    @Tag(name="Admin")
+    @GetMapping("/revertTransaction")
+    public void revertTransaction(@RequestParam Long id){
+         accountService.revertT(id);
+    }
 
     @DeleteMapping("/deleteAccount")
     public ResponseEntity<String> deleteAccount(@RequestParam Long id){

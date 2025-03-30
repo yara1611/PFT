@@ -18,7 +18,8 @@ public class UserService {
     public void createUser(User user){
        userRepository.save(user);
     }
-    public void deleteUser(User user){
+    public void deleteUser(Long userId){
+        User user = userRepository.findById(userId).orElseThrow(()->new IllegalStateException("User is not found"));
         userRepository.delete(user);
     }
 
@@ -52,5 +53,4 @@ public class UserService {
         userRepository.save(currentUser);
     }
 
-    //TODO: delete user
 }
