@@ -2,7 +2,9 @@
 <h2>Features:</h2>
 <li>Deposit/Withdraw Money</li>
 <li>Logged Transactions</li>
+<li>Revert The Most Recent Transaction</li>
+<li>Add/Delete Multiple Accounts</li>
 <hr>
 <h2>Tools:</h2>
-<li>Java Springboot Framework</li>
-<li> H2 Database</li>
+<li>Java Spring boot Framework</li>
+<li>H2 Database</li>
