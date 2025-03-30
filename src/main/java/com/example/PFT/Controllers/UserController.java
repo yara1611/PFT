@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/v1/users")
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -31,7 +31,7 @@ public class UserController {
 
     //TODO change password
     @PutMapping("/changePassword")
-    public ResponseEntity<String> editUser(@RequestParam Long userId, @RequestBody String newPass){
+    public ResponseEntity<String> editUser(@RequestParam Long userId, @RequestParam String newPass){
         userService.changePassword(userId,newPass);
         return ResponseEntity.ok().body("Password is successfully updated");
     }
@@ -40,7 +40,7 @@ public class UserController {
 
     //TODO LogIn
     @GetMapping("/login")
-    public ResponseEntity<String> login (@RequestBody String username, @RequestBody String Password){
+    public ResponseEntity<String> login (@RequestParam String username, @RequestParam String Password){
         User user=userService.getUserByUsername(username);
         boolean checkPass = userService.checkPass(user,Password);
         if(!checkPass){
@@ -49,6 +49,7 @@ public class UserController {
         return ResponseEntity.ok().body("User "+username+" successfully Logged in");
     }
     //Admin Stuff
+   //TODO: Make it not return the password
     @GetMapping("/allUsers")
     public List<User> getUsers(){
         return userService.getUsers();

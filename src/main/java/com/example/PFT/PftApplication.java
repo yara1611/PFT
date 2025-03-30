@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @SpringBootApplication
-
+@RequestMapping("api/v1")
 public class PftApplication {
 
 	public static void main(String[] args) {
