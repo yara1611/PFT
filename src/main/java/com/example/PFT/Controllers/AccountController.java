@@ -65,14 +65,15 @@ public class AccountController {
 
     @Tag(name="Admin")
     @GetMapping("/allTransactions")
-    public List<Transaction> getTrans(@RequestParam Long accountId){
-        return transactionService.getAllTransactions(accountId);
+    public ResponseEntity<List<Transaction>> getTransactions(@RequestParam Long accountId){
+        return ResponseEntity.ok().body(transactionService.getAllTransactions(accountId));
     }
 
     @Tag(name="Admin")
     @GetMapping("/revertTransaction")
-    public void revertTransaction(@RequestParam Long id){
+    public ResponseEntity<String> revertTransaction(@RequestParam Long id){
          accountService.revertT(id);
+        return ResponseEntity.ok().body("Account successfully deleted.");
     }
 
     @DeleteMapping("/deleteAccount")
