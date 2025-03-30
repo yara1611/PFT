@@ -48,7 +48,9 @@ public class UserService {
 
     public void changePassword(Long userId, String newPassword){
         User currentUser = userRepository.findById(userId).orElseThrow(()->new IllegalStateException("User with id: "+userId+" not found"));
-        currentUser.setPassword(newPassword); // Consider hashing passwords before saving
+        currentUser.setPassword(newPassword); //TODO:Consider hashing passwords before saving
         userRepository.save(currentUser);
     }
+
+    //TODO: delete user
 }

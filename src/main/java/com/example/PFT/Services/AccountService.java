@@ -34,16 +34,13 @@ public class AccountService {
 
         account.setName(name==null? "New Account":name);
         account.setUser(user);
-        account.setBalance(balance);
+        account.setBalance(balance==null?0.0:balance);
         accountRepository.save(account);
     }
 
     public void makeDeposit(Long accountID, Double amount,TransactionType type){
         //Account account = accountRepository.findById(accountID).get();
 
-//        if(account == null){
-//            throw new IllegalStateException("Account with id: "+accountID+" is not found");
-//        }
        Account account = accountRepository.findById(accountID)
                .orElseThrow(() -> new IllegalStateException("Account with id: " + accountID + " is not found"));
 
@@ -65,7 +62,8 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public void deleteAccount(Account account){
+    public void deleteAccount(Long id){
+        Account account = accountRepository.findById(id).orElseThrow(()->new IllegalStateException("Account with id: "+id+" is not found"));
         accountRepository.delete(account);
     }
 

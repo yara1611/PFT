@@ -62,5 +62,10 @@ public class AccountController {
         return transactionService.getAllTransactions(accountId);
     }
 
-    //TODO Delete account
+
+    @DeleteMapping("/deleteAccount")
+    public ResponseEntity<String> deleteAccount(@RequestParam Long id){
+        accountService.deleteAccount(id);
+        return ResponseEntity.ok().body("Account successfully deleted.");
+    }
 }

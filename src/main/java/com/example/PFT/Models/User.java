@@ -26,7 +26,7 @@ public class User {
     @Column(nullable = false)
     private String password;
     @JsonManagedReference
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<Account> account;
 
     public User(String name, String username, String password) {
