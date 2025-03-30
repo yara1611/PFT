@@ -73,7 +73,7 @@ public class AccountController {
     @GetMapping("/revertTransaction")
     public ResponseEntity<String> revertTransaction(@RequestParam Long id){
          accountService.revertT(id);
-        return ResponseEntity.ok().body("Account successfully deleted.");
+        return ResponseEntity.ok().body("Transaction successfully reverted.");
     }
 
     @DeleteMapping("/deleteAccount")
