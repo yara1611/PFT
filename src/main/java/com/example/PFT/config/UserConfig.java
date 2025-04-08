@@ -1,8 +1,7 @@
-package com.example.PFT;
+package com.example.PFT.config;
 
 import com.example.PFT.Models.Account;
 import com.example.PFT.Models.User;
-import com.example.PFT.Repositories.AccountRepository;
 import com.example.PFT.Repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
