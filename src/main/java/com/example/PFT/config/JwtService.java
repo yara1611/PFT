@@ -76,7 +76,7 @@ public class JwtService {
 }
 
 
-/*NOTES:
+/*NOTE:
 * Header -> algo and token type
 * Payload -> data
 * Signature -> verification
