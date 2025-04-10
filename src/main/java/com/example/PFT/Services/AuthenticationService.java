@@ -1,15 +1,15 @@
 package com.example.PFT.Services;
 
-import com.example.PFT.Auth.AuthenticationRequest;
-import com.example.PFT.Auth.AuthenticationResponse;
-import com.example.PFT.Auth.RegisterRequest;
+import com.example.PFT.Models.Auth.AuthenticationRequest;
+import com.example.PFT.Models.Auth.AuthenticationResponse;
+import com.example.PFT.Models.Auth.RegisterRequest;
 import com.example.PFT.Models.User;
 import com.example.PFT.Models.enums.Role;
 import com.example.PFT.Repositories.UserRepository;
-import com.example.PFT.config.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +20,9 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+
+    /*Note: coordinator where u can register multiple providers
+     and based on request type it'll deliver an authentication request to the correct provider*/
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
@@ -37,9 +40,10 @@ public class AuthenticationService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword()));
-        var user = userRepository.findUserByUsername(request.getUsername()); //add exception
+        var user = userRepository.findUserByUsername(request.getUsername()).orElseThrow(()->new UsernameNotFoundException("User not found")); //add exception
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken).build();
     }
+
 }

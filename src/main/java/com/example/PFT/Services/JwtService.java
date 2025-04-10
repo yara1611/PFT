@@ -1,4 +1,4 @@
-package com.example.PFT.config;
+package com.example.PFT.Services;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -17,7 +17,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    //can be moved to app.properties
+    //OPTIMIZE: can be moved to app.properties
     private static final String SECRET_KEY ="P4X2m8NqgW0HDBGnaMNCFxBXP5zFRReFgvvMHW36YovnBJQBLuBZdAagthqpC0wwrKMXP1fiDIJoZu/BPaAgcAQeXJQjK+ynKSVzU2Oztl7oVA0Xs2UrxdR7FPxPleL2eQVjHmst1tMmx+MTWTua4XPIaNl5eMM0uUz7R+AFSPQR/unuwIV8KD8xvI9AM5CrJVL0vDMDqyOxuMIQc1FYiq7VLMGO4zkJdyUp7nHZNuPxOcHGY9cVOGsgbv06gKuKMRLCjTzu18navfnzkitvU1re0gP2NINQj0YZadLEFQVuTfpnsPkaLfpPzVGDUecSW4ZtMnMSVgq07Tev0q0+Tit1mSfhOr1Hmt5A7CxsLLI=\n";
 
     public String extractUsername(String token) {
@@ -45,7 +45,16 @@ public class JwtService {
                 .compact();
     }
 
-    //validate a token
+    public String generateJwtTokenForgotPwd(String username){
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + 1000*120))
+                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+    //Validate a token
     public boolean isTokenValid(String token, UserDetails userDetails){
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token) ;

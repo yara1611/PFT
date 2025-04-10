@@ -1,9 +1,9 @@
 package com.example.PFT.Controllers;
 
 
-import com.example.PFT.Auth.AuthenticationRequest;
-import com.example.PFT.Auth.AuthenticationResponse;
-import com.example.PFT.Auth.RegisterRequest;
+import com.example.PFT.Models.Auth.AuthenticationRequest;
+import com.example.PFT.Models.Auth.AuthenticationResponse;
+import com.example.PFT.Models.Auth.RegisterRequest;
 import com.example.PFT.Services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,9 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> addUser(@RequestBody AuthenticationRequest request){ //@RequestBody -> in body
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request){ //@RequestBody -> in body
         return ResponseEntity.ok(authService.authenticate(request));
     }
+
+
 }

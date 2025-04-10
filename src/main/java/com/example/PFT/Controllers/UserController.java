@@ -1,12 +1,17 @@
 package com.example.PFT.Controllers;
 
 
+import com.example.PFT.Models.Dtos.ChangePasswordRequest;
+import com.example.PFT.Models.Dtos.EditUserRequest;
+import com.example.PFT.Models.Dtos.UserDTO;
 import com.example.PFT.Models.User;
 import com.example.PFT.Services.UserService;
-import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,27 +19,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@SecurityRequirement(name = "bearerAuth")
 public class UserController {
     @Autowired
     private UserService userService;
 
-    //form and button
-    @PostMapping("/register")
-    public ResponseEntity<String> addUser(@RequestBody User user){ //@RequestBody -> in body
-        userService.createUser(user);
-        return ResponseEntity.ok().body("Successfully Created User: "+user.getName()+" with username: "+user.getUsername());
-    }
 
     @PutMapping("/editUser")
-    public ResponseEntity<String> editUser(@RequestParam Long userId, @RequestBody User newUser){
-        userService.editUser(userId,newUser);
+    public ResponseEntity<String> editUser(@RequestBody EditUserRequest newUser){
+        userService.editUser(userService.getCurrentUser(),newUser);
         return ResponseEntity.ok().body("User \""+newUser.getUsername()+"\" is successfully updated");
     }
 
 
     @PutMapping("/changePassword")
-    public ResponseEntity<String> editUser(@RequestParam Long userId, @RequestParam String newPass){
-        userService.changePassword(userId,newPass);
+    public ResponseEntity<String> editUser(@RequestParam ChangePasswordRequest request){
+        userService.changePassword(request);
         return ResponseEntity.ok().body("Password is successfully updated");
     }
 
@@ -45,22 +45,18 @@ public class UserController {
     }
 
 
-    @GetMapping("/login")
-    public ResponseEntity<String> login (@RequestParam String username, @RequestParam String Password){
-        User user=userService.getUserByUsername(username);
-        boolean checkPass = userService.checkPass(user,Password);
-        if(!checkPass){
-            return ResponseEntity.badRequest().body("Wrong username or password");
-        }
-        return ResponseEntity.ok().body("User "+username+" successfully Logged in");
-    }
-
 
    //TODO: Make it not return the password
     @Tag(name="Admin")
     @GetMapping("/allUsers")
     public List<User> getUsers(){
         return userService.getUsers();
+    }
+
+    @GetMapping("/currentUser")
+    public ResponseEntity<UserDTO> getCurrentUser(){
+
+        return ResponseEntity.ok(userService.getUser());
     }
 
 }

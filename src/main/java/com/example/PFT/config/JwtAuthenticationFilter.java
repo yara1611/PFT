@@ -1,5 +1,6 @@
 package com.example.PFT.config;
 
+import com.example.PFT.Services.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

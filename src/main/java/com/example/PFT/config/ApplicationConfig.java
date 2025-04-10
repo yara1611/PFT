@@ -22,8 +22,7 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService(){
-        return username -> repository.findUserByUsername(username);
-//                .orElseThrow(()->new UsernameNotFoundException("User not found"));
+        return username -> repository.findUserByUsername(username).orElseThrow(()->new UsernameNotFoundException("User not found"));
     }
 
     //data access object responsible for fetching user details and encoding password etc.

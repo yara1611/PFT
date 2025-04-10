@@ -26,12 +26,10 @@ public class AccountService {
     }
 
     //TODO:make DTOs
-    public void addAccount(String username, Double balance, String name){
-        User user = Optional.ofNullable(userRepository.findUserByUsername(username))
-                .orElseThrow(() -> new IllegalStateException("User not found"));
-
+    public void addAccount(User user,Double balance, String name){
+//        User user = Optional.ofNullable(userRepository.findUserByUsername(username))
+//                .orElseThrow(() -> new IllegalStateException("User not found"));
         Account account=new Account();
-
         account.setName(name==null? "New Account":name);
         account.setUser(user);
         account.setBalance(balance==null?0.0:balance);

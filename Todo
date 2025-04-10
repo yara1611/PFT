@@ -49,15 +49,6 @@
       }
       ```
 
-#TODO:  5. JWT Filter for Validating the Token
-- [ ] Implement a `JwtAuthenticationFilter` to validate JWT in every request and set the security context.
-    - Example:
-      ```java
-      @Component
-      public class JwtAuthenticationFilter extends OncePerRequestFilter {
-          // Filter implementation
-      }
-      ```
 
 #TODO:  6. Logging and Auditing
 - [ ] Log sensitive information carefully (avoid logging JWTs or passwords).

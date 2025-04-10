@@ -1,9 +1,12 @@
 package com.example.PFT.Controllers;
 
 import com.example.PFT.Models.Transaction;
+import com.example.PFT.Models.User;
 import com.example.PFT.Models.enums.TransactionType;
 import com.example.PFT.Services.AccountService;
 import com.example.PFT.Services.TransactionService;
+import com.example.PFT.Services.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,17 +18,21 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/accounts")
+@SecurityRequirement(name = "bearerAuth")
 public class AccountController {
 
     @Autowired
     private AccountService accountService;
     @Autowired
     private TransactionService transactionService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/addAccount")
-    public ResponseEntity<String> addAccount(@RequestParam String username, @RequestParam Double balance, @RequestParam(required = false) String name){
-        accountService.addAccount(username,balance, name);
-        return ResponseEntity.ok().body("Account \""+name+"\" is successfully added account to user: "+username);
+    public ResponseEntity<String> addAccount(@RequestParam Double balance, @RequestParam(required = false) String name){
+        User user = userService.getCurrentUser();
+        accountService.addAccount(userService.getCurrentUser(),balance, name);
+        return ResponseEntity.ok().body("Account \""+name+"\" is successfully added account to user "+user.getUsername());
     }
     @PutMapping("/makeDeposit")
     public ResponseEntity<Map<String, Object>> deposit(@RequestParam Long id, @RequestParam Double amount) {

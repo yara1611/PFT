@@ -8,6 +8,7 @@ import com.example.PFT.Repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -38,6 +39,9 @@ public class TransactionService {
         }
     }
 
-    //TODO:Filter transactions by date
+    //Optimize:Filter transactions by date
+    public List<Transaction> getAllTransactions(Long id, Date date){
+        return transactionRepository.findTransactionsByDate(id,date);
+    }
 
 }
