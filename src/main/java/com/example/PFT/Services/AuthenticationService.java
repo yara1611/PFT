@@ -1,8 +1,8 @@
 package com.example.PFT.Services;
 
-import com.example.PFT.Models.Auth.AuthenticationRequest;
-import com.example.PFT.Models.Auth.AuthenticationResponse;
-import com.example.PFT.Models.Auth.RegisterRequest;
+import com.example.PFT.Models.Dtos.AuthenticationRequest;
+import com.example.PFT.Models.AuthenticationResponse;
+import com.example.PFT.Models.Dtos.RegisterRequest;
 import com.example.PFT.Models.User;
 import com.example.PFT.Models.enums.Role;
 import com.example.PFT.Repositories.UserRepository;

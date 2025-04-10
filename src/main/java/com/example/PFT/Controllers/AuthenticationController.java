@@ -1,9 +1,9 @@
 package com.example.PFT.Controllers;
 
 
-import com.example.PFT.Models.Auth.AuthenticationRequest;
-import com.example.PFT.Models.Auth.AuthenticationResponse;
-import com.example.PFT.Models.Auth.RegisterRequest;
+import com.example.PFT.Models.Dtos.AuthenticationRequest;
+import com.example.PFT.Models.AuthenticationResponse;
+import com.example.PFT.Models.Dtos.RegisterRequest;
 import com.example.PFT.Services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

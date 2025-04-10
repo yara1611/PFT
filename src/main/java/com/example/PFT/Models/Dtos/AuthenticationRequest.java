@@ -1,4 +1,4 @@
-package com.example.PFT.Models.Auth;
+package com.example.PFT.Models.Dtos;
 
 import lombok.*;
 

@@ -4,7 +4,6 @@ import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Setter
 @Getter
 public class EditUserRequest {
