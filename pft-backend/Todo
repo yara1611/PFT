@@ -1,0 +1,92 @@
+# TODO: Steps for Implementing JWT Authentication & Authorization
+
+#TODO: 1. Secure Endpoints with Role-Based Authorization
+- [ ] Define roles (e.g., `USER`, `ADMIN`, etc.) for role-based access.
+- [ ] Secure endpoints using `@PreAuthorize` or `@Secured` annotations.
+    - Example:
+      ```java
+      @PreAuthorize("hasRole('ADMIN')")
+      @GetMapping("/admin")
+      public String getAdminData() {
+          return "Admin Data";
+      }
+      ```
+
+#TODO: 2. Handle JWT Expiration
+- [ ] Implement expiration handling in JWT. Ensure token expiry is checked with a method like `isTokenExpired`.
+    - Example:
+      ```java
+      private boolean isTokenExpired(String token) {
+          return extractExpiration(token).before(new Date());
+      }
+      ```
+- [ ] Return HTTP status `401 Unauthorized` if the token has expired.
+
+#TODO:  3. Implement Refresh Token Mechanism
+- [ ] Create a refresh token endpoint (e.g., `/refresh-token`) to allow users to obtain a new JWT after token expiration.
+    - Example:
+      ```java
+      @PostMapping("/refresh-token")
+      public ResponseEntity<?> refreshToken(@RequestBody String refreshToken) {
+          if (jwtService.isTokenValid(refreshToken)) {
+              String newToken = jwtService.generateToken(userDetails);
+              return ResponseEntity.ok(new AuthenticationResponse(newToken));
+          }
+          return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid refresh token");
+      }
+      ```
+
+#TODO:  4. Exception Handling for Unauthorized Access
+- [ ] Implement global exception handling for `Unauthorized` access.
+    - Example:
+      ```java
+      @ControllerAdvice
+      public class GlobalExceptionHandler {
+          @ExceptionHandler(AccessDeniedException.class)
+          public ResponseEntity<String> handleAccessDeniedException(AccessDeniedException ex) {
+              return new ResponseEntity<>("Access denied", HttpStatus.FORBIDDEN);
+          }
+      }
+      ```
+
+
+#TODO:  6. Logging and Auditing
+- [ ] Log sensitive information carefully (avoid logging JWTs or passwords).
+- [ ] Implement auditing to track who accessed what and when, especially for sensitive operations.
+
+#TODO:  7. Secure JWT Secrets
+- [ ] Store `SECRET_KEY` in environment variables or a secret management tool (not hardcoded).
+- [ ] Ensure the signing key is strong and complex.
+
+#TODO:  8. CORS Configuration (Cross-Origin Resource Sharing)
+- [ ] Configure CORS properly if the frontend and backend are on different domains.
+    - Example:
+      ```java
+      @Configuration
+      public class WebConfig implements WebMvcConfigurer {
+          @Override
+          public void addCorsMappings(CorsRegistry registry) {
+              registry.addMapping("/**").allowedOrigins("http://localhost:3000").allowedMethods("GET", "POST", "PUT", "DELETE");
+          }
+      }
+      ```
+
+#TODO:  9. Secure JWT Transmission
+- [ ] Ensure JWT is sent over HTTPS to avoid MITM (Man-in-the-Middle) attacks.
+- [ ] Consider storing JWT in `HttpOnly` cookies for better security.
+
+#TODO:  10. Logout Implementation
+- [ ] Implement logout functionality to delete JWT on the client-side, especially if stored in local storage or cookies.
+- [ ] Ensure proper invalidation of tokens upon logout.
+
+#TODO:  11. Testing and Monitoring
+- [ ] Write unit and integration tests for JWT authentication and authorization.
+- [ ] Monitor JWT usage and check for invalid or expired token usage.
+
+#TODO:  12. Update JWT Mechanism
+- [ ] Implement token revocation or blacklisting if necessary.
+- [ ] Consider adding custom claims (roles, permissions, etc.) to the JWT payload for more fine-grained authorization control.
+
+#TODO:  Additional Notes:
+- [ ] Review security best practices for JWT (e.g., short expiration time, secure storage, etc.).
+- [ ] Ensure the user can only access resources permitted by their role and permissions.
