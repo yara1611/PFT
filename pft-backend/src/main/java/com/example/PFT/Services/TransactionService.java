@@ -1,9 +1,7 @@
 package com.example.PFT.Services;
 
-import com.example.PFT.Models.Account;
 import com.example.PFT.Models.Transaction;
 import com.example.PFT.Models.enums.TransactionType;
-import com.example.PFT.Repositories.AccountRepository;
 import com.example.PFT.Repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +37,7 @@ public class TransactionService {
         }
     }
 
-    //Optimize:Filter transactions by date
+    //Optimize:Filter transactions by date range
     public List<Transaction> getAllTransactions(Long id, Date date){
         return transactionRepository.findTransactionsByDate(id,date);
     }

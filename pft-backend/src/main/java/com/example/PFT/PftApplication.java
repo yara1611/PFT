@@ -22,6 +22,4 @@ public class PftApplication {
 		SpringApplication.run(PftApplication.class, args);
 	}
 
-
-
 }

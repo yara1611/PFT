@@ -24,10 +24,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    //Todo: use the JWT one
-    public void createUser(User user){
-       userRepository.save(user);
-    }
+
     public void deleteUser(Long userId){
         User user = userRepository.findById(userId).orElseThrow(()->new IllegalStateException("User is not found"));
         userRepository.delete(user);
@@ -56,11 +53,10 @@ public class UserService {
         return userRepository.findUserByUsername(username).orElseThrow(()->new UsernameNotFoundException("User not found"));
     }
 
-    //Todo: Remove
+    //Todo: add it to register
     public boolean checkPass(String password){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        return user.getPassword().equals(password);
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        return password != null && password.matches(regex);
     }
 
     public void editUser(User currentUser, EditUserRequest updatedUser) {

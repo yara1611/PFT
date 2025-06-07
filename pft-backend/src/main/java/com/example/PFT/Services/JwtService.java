@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +18,8 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    //OPTIMIZE: can be moved to app.properties
-    private static final String SECRET_KEY ="P4X2m8NqgW0HDBGnaMNCFxBXP5zFRReFgvvMHW36YovnBJQBLuBZdAagthqpC0wwrKMXP1fiDIJoZu/BPaAgcAQeXJQjK+ynKSVzU2Oztl7oVA0Xs2UrxdR7FPxPleL2eQVjHmst1tMmx+MTWTua4XPIaNl5eMM0uUz7R+AFSPQR/unuwIV8KD8xvI9AM5CrJVL0vDMDqyOxuMIQc1FYiq7VLMGO4zkJdyUp7nHZNuPxOcHGY9cVOGsgbv06gKuKMRLCjTzu18navfnzkitvU1re0gP2NINQj0YZadLEFQVuTfpnsPkaLfpPzVGDUecSW4ZtMnMSVgq07Tev0q0+Tit1mSfhOr1Hmt5A7CxsLLI=\n";
-
+    @Value("${secret.key}")
+    private static String SECRET_KEY;
     public String extractUsername(String token) {
         return extractClaim(token,Claims::getSubject);
     }
@@ -45,6 +45,7 @@ public class JwtService {
                 .compact();
     }
 
+    //TODO: use this
     public String generateJwtTokenForgotPwd(String username){
         return Jwts.builder()
                 .setSubject(username)
@@ -95,5 +96,4 @@ public class JwtService {
 * the sign-in algo and key size will depend on:
 * - the security requirements of the application
 * - level trust of signing party
-*
 * */
