@@ -1,32 +1,34 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function NavMenu(props) {
     let { loggedIn, setLoggedIn } = props;
     return (
         <nav className="nav-menu">
-            <ul className="flex space-x-4">
+            <ul className="flex gap-10 justify-center">
                 <li>
-                    <a href="#home">Home</a>
+                    <Link to="/">Home</Link>
                 </li>
                 {loggedIn && (<>
                     <li>
-                        <a href="#about">Accounts</a>
+                    <Link to="/">Accounts</Link>
                     </li>
                     <li>
-                        <a href="#services">Transactions</a>
+                    <Link to="/">Transactions</Link>
                     </li></>
                 )}
                 {!loggedIn && (<>
                     <li>
-                        <a href="#about">Log In</a>
+                    <Link to="/login">Log In</Link>
                     </li>
                     <li>
-                        <a href="#services">Sign Up</a>
-                    </li></>
+                    <Link to="/signup">Sign Up</Link>
+                    </li>
+                </>
                 )}
 
                 <li>
-                    <a href="#contact">Contact</a>
+                    <Link to="/about">About</Link>
                 </li>
             </ul>
         </nav>
