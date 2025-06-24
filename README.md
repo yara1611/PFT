@@ -9,3 +9,8 @@
 <li>Java Spring boot Framework</li>
 <li>H2 Database</li>
 <li>Swagger-UI</li>
+<hr>
+<h2>To Do:</h2>
+<li>Change DB server</li>
+<li>Implement Role-based access</li>
+<li>CORS</li>
