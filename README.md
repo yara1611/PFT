@@ -15,3 +15,4 @@
 <li>Implement Role-based access</li>
 <li>CORS</li>
 <li>account displayed according to current user</li>
+<li>handle log out</li>
