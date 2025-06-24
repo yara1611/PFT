@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
+//Swagger Configuration
 @Configuration
 public class OpenAPIConfiguration {
 
@@ -18,15 +19,15 @@ public class OpenAPIConfiguration {
         server.setUrl("http://localhost:8080");
         server.setDescription("Development");
 
-        Contact myContact = new Contact();
-        myContact.setName("Jane Doe");
-        myContact.setEmail("your.email@gmail.com");
+//        Contact myContact = new Contact();
+//        myContact.setName("Jane Doe");
+//        myContact.setEmail("your.email@gmail.com");
 
         Info information = new Info()
                 .title("Personal Finances Tracker API")
                 .version("1.0")
-                .description("This API exposes endpoints to manage your personal finances.")
-                .contact(myContact);
+                .description("This API exposes endpoints to manage your personal finances.");
+//                .contact(myContact);
         return new OpenAPI().info(information).servers(List.of(server));
     }
 }

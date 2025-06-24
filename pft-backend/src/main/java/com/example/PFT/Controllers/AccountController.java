@@ -64,6 +64,8 @@ public class AccountController {
         }
     }
 
+    //displays balance of account with entered id not of the current user
+    //so if user has access to id of another users account it can see it
     @GetMapping("/displayBalance")
     public String displayBalance(@RequestParam Long accountId){
         return accountService.displayBalance(accountId);

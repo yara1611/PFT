@@ -14,3 +14,4 @@
 <li>Change DB server</li>
 <li>Implement Role-based access</li>
 <li>CORS</li>
+<li>account displayed according to current user</li>

@@ -34,6 +34,10 @@ public class AccountService {
         accountRepository.save(account);
     }
 
+    public List<Account> getAllAccounts(User user){
+        return accountRepository.findAccountsByUser(user.getUserId());
+    }
+
     //TODO:Change Name
     public void makeDeposit(Long accountID, Double amount,TransactionType type){
 
