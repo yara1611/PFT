@@ -3,18 +3,22 @@ import { Link } from "react-router-dom";
 
 function NavMenu(props) {
     let { loggedIn, setLoggedIn } = props;
+    console.log("NavMenu props", props);
     return (
         <nav className="nav-menu">
             <ul className="flex gap-10 justify-center">
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/">Dashboard</Link>
                 </li>
                 {loggedIn && (<>
                     <li>
-                    <Link to="/">Accounts</Link>
+                    <Link to="/accounts">Accounts</Link>
                     </li>
                     <li>
-                    <Link to="/">Transactions</Link>
+                    <Link to="/">Records</Link>
+                    </li>
+                    <li>
+                    <Link to="/">Imports</Link>
                     </li></>
                 )}
                 {!loggedIn && (<>

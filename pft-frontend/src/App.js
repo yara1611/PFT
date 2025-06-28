@@ -6,6 +6,7 @@ import About from './Views/About';
 import Signup from './Views/Signup';
 import Login from './Views/Login';
 import Footer from './components/Footer';
+import Accounts from './Views/Accounts';
 
 function App() {
   return (<div className="relative pb-10 min-h-screen">
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/login" element={<Login/>} />
+          <Route path="/accounts" element={<Accounts/>} />
         {/* <Route path="/profile" element={<Profile/>} /> */}
           <Route path="/about" element={<About/>} />
         </Routes>
