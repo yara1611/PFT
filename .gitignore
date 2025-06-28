@@ -52,7 +52,7 @@ pft-frontend/.parcel-cache/
 # ======================
 pft-backend/target/
 pft-backend/.mvn/wrapper/maven-wrapper.jar
-
+*.jar
 <<<<<<< HEAD
 ### VS Code ###
 .vscode/
