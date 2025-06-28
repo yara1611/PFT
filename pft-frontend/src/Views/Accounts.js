@@ -1,22 +1,26 @@
 import SortingSideBar from "../components/SortingSideBar.js";
 
 function Accounts() {
-    const accounts =[{name:'account 1', balance:10},{name:'account 2', balance:10},{name:'account 3', balance:10}];
+    const accounts =[{name:'Account 1', balance:10},{name:'Account 2', balance:10},{name:'Account 3', balance:10}];
     
   return (<>
-    <div className="container grid grid-cols-2 gap-4 h-screen w-full p-6">
-        <div className="bg-blue-100 w-full p-4 rounded-xl border border-gray-950">
+    <div className="container grid grid-cols-2 gap-0 h-screen w-full p-6">
+        <div className="bg-white border border-gray-200 w-64 p-4 rounded-xl">
         <SortingSideBar title='Accounts'/>
       </div>
-      <div id="accounts" className="p-4 w-full rounded-xl bg-white border border-gray-950">
+      <div id="accounts" className="p-4 mr-0 w-full">
         <ul>
             {
                 accounts.map((acc,index)=>(
-                   <div className="bg-zinc-200 mb-1 rounded-s p-2" key={index}>
-                    <span className="font-bold">
+                   <div className=" bg-white border border-gray-200 mb-1 rounded-xl p-2 flex justify-between " key={index}>
+                    <span className="">
                         {acc.name} 
                     </span>
-                    <span className="float-right">
+                    <span className="">
+                        type
+                    </span>
+                    {/*type span*/}
+                    <span className="">
                         {acc.balance}$
                     </span>
                     

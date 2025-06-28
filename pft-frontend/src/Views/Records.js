@@ -10,7 +10,7 @@ function Records(){
         <div className="bg-blue-100 w-full p-4 rounded-xl border border-gray-950">
         <SortingSideBar title='Records'/>
       </div>
-      <div id="accounts" className="p-4 w-full rounded-xl bg-white border border-gray-950">
+      <div id="accounts" className="p-4 w-full rounded-xl bg-white border border-gray-200">
         <ul>
             {
                 records.map((rec,index)=>(
