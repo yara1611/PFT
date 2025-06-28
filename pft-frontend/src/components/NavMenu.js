@@ -30,10 +30,6 @@ function NavMenu(props) {
                     </li>
                 </>
                 )}
-
-                <li>
-                    <Link to="/about">About</Link>
-                </li>
             </ul>
         </nav>
     );

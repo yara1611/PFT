@@ -6,7 +6,7 @@ function Header(props) {
      const [loggedIn, setLoggedIn]= useState(true);
     return (<>
     {/* items-center is the vertically centered */}
-    <header className="border-b p-3 flex justify-between items-center flex-row h-16 w-full">
+    <header className="border-b p-3 flex justify-between items-center flex-row h-[74px] w-full">
     <span className="font-bold text-xl"> Personal Financer</span>
     <NavMenu loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
     <span><img src="" alt="avatar"/></span>
