@@ -1,23 +1,25 @@
-import SortingSideBar from "../components/SortingSideBar.js";
+import React from 'react';
+import SortingSideBar from '../components/SortingSideBar';  
 
-function Accounts() {
-    const accounts =[{name:'account 1', balance:10},{name:'account 2', balance:10},{name:'account 3', balance:10}];
-    
-  return (<>
-    <div className="container grid grid-cols-2 gap-4 h-screen w-full p-6">
+function Records(){
+    const records =[{name:'record 1', balance:10},{name:'record 2', balance:10},{name:'record 3', balance:10}];
+
+
+    return <>
+        <div className="container grid grid-cols-2 gap-4 h-screen w-full p-6">
         <div className="bg-blue-100 w-full p-4 rounded-xl border border-gray-950">
-        <SortingSideBar title='Accounts'/>
+        <SortingSideBar title='Records'/>
       </div>
       <div id="accounts" className="p-4 w-full rounded-xl bg-white border border-gray-950">
         <ul>
             {
-                accounts.map((acc,index)=>(
+                records.map((rec,index)=>(
                    <div className="bg-zinc-200 mb-1 rounded-s p-2" key={index}>
                     <span className="font-bold">
-                        {acc.name} 
+                        {rec.name} 
                     </span>
                     <span className="float-right">
-                        {acc.balance}$
+                        {rec.balance}$
                     </span>
                     
                     </div>
@@ -30,8 +32,8 @@ function Accounts() {
       
     </div>
     
-  </>
-    
-  );
+  </>    
+
 }
-export default Accounts;
+
+export default Records;

@@ -15,7 +15,7 @@ function NavMenu(props) {
                     <Link to="/accounts">Accounts</Link>
                     </li>
                     <li>
-                    <Link to="/">Records</Link>
+                    <Link to="/records">Records</Link>
                     </li>
                     <li>
                     <Link to="/">Imports</Link>
