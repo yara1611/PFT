@@ -1,26 +1,32 @@
 import SortingSideBar from "../components/SortingSideBar.js";
+import useGet from "../Hooks/useFetch.js";
 
 function Accounts() {
-    const accounts =[{name:'Account 1', balance:10},{name:'Account 2', balance:10},{name:'Account 3', balance:10}];
-    
+// Fetching accounts data from the mock API
+const { data: accounts, loading, error } = useGet('https://67ec96c2aa794fb3222e2a13.mockapi.io/Accounts');
+
+//handeling error state
+if(error) {
+    document.getElementById("accounts-list").innerHTML = `<div class="text-red-500">Error: ${error.message}</div>`;
+}
+
   return (<>
-    <div className="container grid grid-cols-2 gap-0 h-screen w-full p-6">
+    <div className="container grid grid-cols-[auto_1fr] gap-0 h-screen w-full p-6">
         <div className="bg-white border border-gray-200 w-64 p-4 rounded-xl">
         <SortingSideBar title='Accounts'/>
       </div>
       <div id="accounts" className="p-4 mr-0 w-full">
-        <ul>
+        <ul id="accounts-list">
             {
-                accounts.map((acc,index)=>(
-                   <div className=" bg-white border border-gray-200 mb-1 rounded-xl p-2 flex justify-between " key={index}>
-                    <span className="">
+                accounts?.map((acc)=>(
+                   <div className=" bg-white border border-gray-200 mb-1 rounded-xl p-2 flex items-center gap-2" key={acc.id}>
+                    <span className="flex-1">
                         {acc.name} 
                     </span>
-                    <span className="">
-                        type
+                    <span className="flex-1 text-center">
+                        {acc.type}
                     </span>
-                    {/*type span*/}
-                    <span className="">
+                    <span className="flex-1 text-right">
                         {acc.balance}$
                     </span>
                     
