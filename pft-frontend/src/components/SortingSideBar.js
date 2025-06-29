@@ -2,10 +2,11 @@ import React from 'react';
 import { postData} from '../Hooks/useFetch';
 
 function SortingSideBar(props){
+    const [data, setData] = React.useState({name: props.acc.name, balance: props.acc.balance, type: props.acc.type});
     let {title,url} = props;
     const handleClick = async () => {
     // This function will be used to create a new account
-  postData('new','10',url)
+  postData(data,url)
   
 }
     

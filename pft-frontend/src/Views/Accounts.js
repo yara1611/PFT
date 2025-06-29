@@ -4,13 +4,18 @@ import useGet from "../Hooks/useFetch.js";
 
 function Accounts() {
 // Fetching accounts data from the mock API
+
 const { data: accounts, loading, error } = useGet('https://67ec96c2aa794fb3222e2a13.mockapi.io/Accounts');
 const accountList = useRef(null);
-
+const acc1 ={
+  name: 'new account',
+  balance: '100',
+  type: 'savings'
+}
   return (<>
     <div className="container grid grid-cols-[auto_1fr] gap-0 h-screen w-full p-6">
         <div className="bg-white border border-gray-200 w-64 p-4 rounded-xl">
-        <SortingSideBar title='Accounts' url='https://67ec96c2aa794fb3222e2a13.mockapi.io/Accounts'/>
+        <SortingSideBar title='Accounts' acc={acc1} url='https://67ec96c2aa794fb3222e2a13.mockapi.io/Accounts'/>
       </div>
       <div id="accounts" ref={accountList} className="p-4 mr-0 w-full">
         {loading &&<svg class="bg-indigo-500 mr-3 size-5 animate-spin" viewBox="0 0 24 24"></svg>}
