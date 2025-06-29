@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function useGet(url) {
+export default function useGet(url) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -33,4 +33,25 @@ function useGet(url) {
     }),[url])
     return { data, loading, error };
 }
-export default useGet;
+
+export async function postData(name,balance,url){
+await fetch(url,{
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ name,balance }),
+}).then((res)=>{
+  return res.json()
+})
+.then((data)=>{
+  console.log('Success:', data);
+  return data;
+}).catch((error) => {
+  console.error('Error:', error);
+return null;
+}).finally(()=>{
+ window.location.reload();
+})
+
+}
