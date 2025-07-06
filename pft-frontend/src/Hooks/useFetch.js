@@ -34,13 +34,13 @@ export default function useGet(url) {
     return { data, loading, error };
 }
 
-export async function postData(acc,url){
+export async function postData(name,type,balance,url){
 await fetch(url,{
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify({ acc }),
+  body: JSON.stringify({ name,type,balance }),
 }).then((res)=>{
   return res.json()
 })

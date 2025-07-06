@@ -6,7 +6,7 @@ function SortingSideBar(props){
     let {title,url} = props;
     const handleClick = async () => {
     // This function will be used to create a new account
-  postData(data,url)
+  postData(data.name,data.type,data.balance,url)
   
 }
     
