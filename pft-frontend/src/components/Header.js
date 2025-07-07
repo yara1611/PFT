@@ -2,14 +2,20 @@ import React from "react";
 import Navigation from "./Navigation";
 import NavMenu from "./NavMenu";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 function Header(props) {
-     const [loggedIn, setLoggedIn]= useState(true);
+    const navigate = useNavigate();
+     const {loggedIn, setLoggedIn}= props;
+     const handleClick=()=>{
+        setLoggedIn(false);
+        navigate('/login')
+     }
     return (<>
     {/* items-center is the vertically centered */}
     <header className="border-b p-3 flex justify-between items-center flex-row h-[74px] w-full">
     <span className="font-bold text-xl"> Personal Financer</span>
-    <NavMenu loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-    <span><img src="" alt="avatar"/></span>
+    <NavMenu loggedIn={loggedIn} />
+    <span><img src="" alt="avatar" onClick={handleClick}/></span>
         {/* <Navigation loggedIn={loggedIn} setLoggedIn={setLoggedIn}/> */}
     </header>
     </>)

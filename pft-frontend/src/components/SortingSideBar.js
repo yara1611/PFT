@@ -7,6 +7,7 @@ function SortingSideBar(props){
     const handleClick = async () => {
     // This function will be used to create a new account
   postData(data.name,data.type,data.balance,url)
+ 
   
 }
     

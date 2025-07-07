@@ -7,26 +7,27 @@ function NavMenu(props) {
     return (
         <nav className="nav-menu">
             <ul className="flex gap-10 justify-center">
-                <li>
-                    <Link to="/">Dashboard</Link>
-                </li>
+
                 {loggedIn && (<>
                     <li>
-                    <Link to="/accounts">Accounts</Link>
+                        <Link to="/">Dashboard</Link>
                     </li>
                     <li>
-                    <Link to="/records">Records</Link>
+                        <Link to="/accounts">Accounts</Link>
                     </li>
                     <li>
-                    <Link to="/">Imports</Link>
+                        <Link to="/records">Records</Link>
+                    </li>
+                    <li>
+                        <Link to="/">Imports</Link>
                     </li></>
                 )}
                 {!loggedIn && (<>
                     <li>
-                    <Link to="/login">Log In</Link>
+                        <Link to="/login">Log In</Link>
                     </li>
                     <li>
-                    <Link to="/signup">Sign Up</Link>
+                        <Link to="/signup">Sign Up</Link>
                     </li>
                 </>
                 )}
