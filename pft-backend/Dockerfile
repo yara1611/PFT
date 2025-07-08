@@ -1,5 +1,22 @@
+# ---- Build Stage ----
+FROM eclipse-temurin:17-jdk-alpine AS builder
+
+WORKDIR /app
+
+COPY .mvn .mvn
+COPY mvnw mvnw
+COPY pom.xml pom.xml
+COPY src src
+
+RUN chmod +x mvnw && ./mvnw clean package -DskipTests
+
+# ---- Run Stage ----
 FROM eclipse-temurin:17-jdk-alpine
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
+
+WORKDIR /app
+
+# Replace the jar name below if it changes in future
+COPY --from=builder /app/target/PFT-0.0.1-SNAPSHOT.jar app.jar
+
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
