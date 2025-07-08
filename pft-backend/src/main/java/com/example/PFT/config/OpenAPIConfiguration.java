@@ -16,9 +16,9 @@ public class OpenAPIConfiguration {
     @Bean
     public OpenAPI defineOpenApi() {
         Server server = new Server();
-        server.setUrl("http://localhost:8080");
+        //server.setUrl("http://localhost:8080");
         //for live one
-        //server.setUrl("https://pft-imqb.onrender.com/");
+        server.setUrl("https://pft-imqb.onrender.com/");
         server.setDescription("Development");
 
 //        Contact myContact = new Contact();
