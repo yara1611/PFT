@@ -50,17 +50,15 @@ pft-frontend/.parcel-cache/
 # ======================
 # Backend (Java / Maven)
 # ======================
+
+# Ignore Maven build output
 pft-backend/target/
+
+# Ignore wrapper JAR only (keep scripts + directory)
 pft-backend/.mvn/wrapper/maven-wrapper.jar
-*.jar
-<<<<<<< HEAD
-### VS Code ###
-.vscode/
-=======
 
-
-# If NetBeans or Gradle builds in backend:
+# Ignore IDE-specific build output from backend
 pft-backend/build/
-!pft-backend/**/src/main/**/build/
-!pft-backend/**/src/test/**/build/
->>>>>>> 8c12a02 (frontend folder)
+
+# Ignore compiled JARs (optional, remove if prebuilding manually)
+*.jar
