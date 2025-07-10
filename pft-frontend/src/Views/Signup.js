@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { postRegister } from "../Hooks/useFetch";
+import { data } from "autoprefixer";
 function Signup(){
 
     const [name,setName]=useState('');
@@ -10,7 +12,9 @@ function Signup(){
 
     const handleSubmit = (e)=>{
         e.preventDefault();
-        console.log(name,email,user,pass)
+       postRegister(name,user,pass,'https://pft-imqb.onrender.com/auth/register')
+       console.log(name,user,pass);
+        
     }
     return<>
     <h1 className="text-3xl font-bold text-center mt-10 mb-5">Signup</h1>

@@ -34,6 +34,24 @@ export default function useGet(url) {
     return { data, loading, error };
 }
 
+export async function postRegister(name,username,password,url){
+  await fetch(url,{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name,username,password }),
+  }).then((res)=>{
+    return res.json()
+  })
+  .then((data)=>{
+    console.log('Success:', data);
+    return data;
+  }).catch((error) => {
+    console.error('Error:', error);
+  })
+}
+
 export async function postData(name,type,balance,url){
 await fetch(url,{
   method: 'POST',
