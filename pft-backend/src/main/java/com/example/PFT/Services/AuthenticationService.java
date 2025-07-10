@@ -6,8 +6,10 @@ import com.example.PFT.Models.Dtos.RegisterRequest;
 import com.example.PFT.Models.User;
 import com.example.PFT.Models.enums.Role;
 import com.example.PFT.Repositories.UserRepository;
+import com.example.PFT.exceptions.UserAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,6 +35,9 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest request) {
         //TODO: i think move checkPass to Front-End
+        if (userRepository.findUserByUsername(request.getUsername()).isPresent()) {
+            throw new UserAlreadyExistsException("Username already exists");
+        }
 
         var user = User.builder()
                 .name(request.getName())
