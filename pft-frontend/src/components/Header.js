@@ -1,5 +1,5 @@
 import NavMenu from "./NavMenu";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useState } from "react-router-dom";
 
 //header returns to loggedout state when refreshed
 //make an avatar component
