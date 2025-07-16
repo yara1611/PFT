@@ -1,8 +1,7 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 function NavMenu(props) {
-    let { loggedIn, setLoggedIn } = props;
+    let { loggedIn} = props;
     console.log("NavMenu props", props);
     return (
         <nav className="nav-menu">

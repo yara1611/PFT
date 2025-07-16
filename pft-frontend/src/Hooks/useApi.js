@@ -14,6 +14,7 @@ export default function useApi() {
         method,
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer `,
         },
         body: body ? JSON.stringify(body) : null,
       });

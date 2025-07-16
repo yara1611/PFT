@@ -4,21 +4,25 @@ function AddButton({ onClick, account, record, url }) {
    const { loading, error, request } = useApi();
     let result;
     
+    // Function to post an account
     const postAccount = async () => {
          result = await request("POST", url, account);
       if(result) {
         console.log("Account created successfully:", result);
         } else {
-          alert("❌ Failed to add account");
+          alert("Failed to add account");
+          console.error("Error creating account:", error);
         }
     }
 
+    // Function to post a record
     const postRecord =  async () => {
         result = await request("POST", url, record);
       if(result) {
         console.log("Record created successfully:", result);
         } else {
-          alert("❌ Failed to add record");
+          alert("Failed to add record");
+          console.error("Error creating record:", error);
         }
     }
 
@@ -33,9 +37,8 @@ function AddButton({ onClick, account, record, url }) {
             postRecord();
         }
          if (onClick) onClick(result);
-    
-  
 }
+
   return (
      <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" onClick={handleClick} disabled={loading}>
             Save

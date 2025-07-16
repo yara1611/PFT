@@ -1,8 +1,9 @@
-import React from "react";
-
 import NavMenu from "./NavMenu";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+//make an avatar component
+//make a dropdown menu for avatar
+//Restyle the header
 function Header(props) {
     const navigate = useNavigate();
      const {loggedIn, setLoggedIn}= props;

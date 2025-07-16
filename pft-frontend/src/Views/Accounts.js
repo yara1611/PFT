@@ -1,8 +1,8 @@
-import { useRef, useState } from "react";
+import {useState } from "react";
 import SortingSideBar from "../components/SortingSideBar.js";
-
 import useApi from "../Hooks/useApi.js";
 import { useEffect } from "react";
+
 function Accounts() {
 // Fetching accounts data from the mock API
 

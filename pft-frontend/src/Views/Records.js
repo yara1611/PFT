@@ -1,10 +1,16 @@
-import React from 'react';
 import SortingSideBar from '../components/SortingSideBar';  
 import useApi from '../Hooks/useApi';
 import { useEffect, useState } from 'react';
+
+
+/*
+Optimize:
+we can change this and make it a list view that serves
+both accounts and records and make accounts and records components 
+*/
+
 function Records(){
-    //const records =[{name:'record 1', balance:10},{name:'record 2', balance:10},{name:'record 3', balance:10}];
-    
+  // Fetching accounts data from the mock API    
   const { request } = useApi(); // Only need request
   const [records, setRecords] = useState([]); // ✅ Store accounts here
   const [loading, setLoading] = useState(true);
@@ -27,7 +33,7 @@ useEffect(() => {
     fetchRecords();
   }, []);
 
-  // ✅ This adds a new account to the state without refetching
+  //This adds a new account to the state without refetching
   const handleRecordAdded = (newRecord) => {
     setRecords((prev) => [...prev, newRecord]);
   };
