@@ -29,7 +29,7 @@ function AddButton({ onClick, account, record, url }) {
     }
 
     
-    const handleSubmit = async () => {
+    const handleClick = async () => {
    //This function will be used to create a new account
       
         if(account){
@@ -42,7 +42,7 @@ function AddButton({ onClick, account, record, url }) {
 }
 
   return (
-     <button type='submit' className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" onSubmit={handleSubmit} disabled={loading}>
+     <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" onClick={handleClick} disabled={loading}>
             Save
     </button>
   );

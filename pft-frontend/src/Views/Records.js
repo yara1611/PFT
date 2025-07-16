@@ -36,6 +36,7 @@ useEffect(() => {
   //This adds a new account to the state without refetching
   const handleRecordAdded = (newRecord) => {
     setRecords((prev) => [...prev, newRecord]);
+    window.location.reload();
   };
 
 

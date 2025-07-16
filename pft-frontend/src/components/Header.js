@@ -2,7 +2,7 @@ import NavMenu from "./NavMenu";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-//header returns to loggedout state when refreshed
+//header stays in logged in state when using back button
 //make an avatar component
 //make a dropdown menu for avatar
 //Restyle the header
