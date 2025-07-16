@@ -1,5 +1,5 @@
 import React from "react";
-import Navigation from "./Navigation";
+
 import NavMenu from "./NavMenu";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ function Header(props) {
      const {loggedIn, setLoggedIn}= props;
      const handleClick=()=>{
         setLoggedIn(false);
+        localStorage.removeItem('loggedIn');
         navigate('/login')
      }
     return (<>

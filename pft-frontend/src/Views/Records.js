@@ -1,19 +1,47 @@
 import React from 'react';
 import SortingSideBar from '../components/SortingSideBar';  
-
+import useApi from '../Hooks/useApi';
+import { useEffect, useState } from 'react';
 function Records(){
-    const records =[{name:'record 1', balance:10},{name:'record 2', balance:10},{name:'record 3', balance:10}];
-    const acc1 ={
-  name: 'new rec',
-  balance: '100',
-  type: 'savings'
-}
+    //const records =[{name:'record 1', balance:10},{name:'record 2', balance:10},{name:'record 3', balance:10}];
+    
+  const { request } = useApi(); // Only need request
+  const [records, setRecords] = useState([]); // ✅ Store accounts here
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+
+useEffect(() => {
+    const fetchRecords = async () => {
+      setLoading(true);
+      try {
+        const result = await request("GET", "https://67ec96c2aa794fb3222e2a13.mockapi.io/Record");
+        setRecords(result || []);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecords();
+  }, []);
+
+  // ✅ This adds a new account to the state without refetching
+  const handleRecordAdded = (newRecord) => {
+    setRecords((prev) => [...prev, newRecord]);
+  };
+
+
 
 //add the record src
     return <>
         <div className="container grid grid-cols-2 gap-4 h-screen w-full p-6">
         <div className="bg-white border border-gray-200 w-64 p-4 rounded-xl">
-        <SortingSideBar title='Records' acc={acc1}/>
+        <SortingSideBar 
+        title='Records' 
+        url='https://67ec96c2aa794fb3222e2a13.mockapi.io/Record'
+        onAccountAdded={handleRecordAdded} />
       </div>
       <div id="accounts" className="p-4 w-full rounded-xl bg-white border border-gray-200">
         <ul>
@@ -38,7 +66,7 @@ function Records(){
     </div>
     
   </>    
-
 }
+
 
 export default Records;

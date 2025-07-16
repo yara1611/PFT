@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLogin } from "../components/Navigation";
 
-function Login({setLoggedIn}){
+import { useNavigate } from 'react-router-dom';
+
+
+function Login({setLoggedIn,loggedIn}){
     const [username, setUsername] = useState('');
     const [pass, setPass] = useState('');
     const navigate = useNavigate();
@@ -11,8 +12,8 @@ function Login({setLoggedIn}){
         //remove this fel akher
         console.log(username,pass)
         setLoggedIn(true)
-        navigate('/home');
-        //localStorage.setItem['loggedIn',JSON.stringify()]
+        navigate('/');
+        localStorage.setItem('loggedIn',JSON.stringify(loggedIn))
     }
 
     return<>

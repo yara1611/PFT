@@ -1,15 +1,17 @@
-import React from 'react';
-import { postData} from '../Hooks/useFetch';
+import {useState} from 'react';
+import useApi from '../Hooks/useApi.js';
+import AddForm from "../components/AddForm.js";
+import AddRecordForm from "../components/AddRecordForm.js";
 
 function SortingSideBar(props){
-    const [data, setData] = React.useState({name: props.acc.name, balance: props.acc.balance, type: props.acc.type});
-    let {title,url} = props;
-    const handleClick = async () => {
-    // This function will be used to create a new account
-  postData(data.name,data.type,data.balance,url)
- 
-  
-}
+
+const [showModal, setShowModal] = useState(false);
+const [isAccounts, setIsAccounts] = useState(props.title === 'Accounts');
+const { title,url} = props;
+    const handleClick = () => {
+        setShowModal(true);
+        
+    }
     
     return <>
         <div className='container'>
@@ -19,6 +21,10 @@ function SortingSideBar(props){
         <input type="text"  placeholder="Search..." className="w-fit p-2 mt-2 mb-2 ml-2 border border-gray-300 rounded" />
         {/* if records do filter if accounts do sorting */}
         </div>
+
+        {/* modal for adding new account */}
+        {isAccounts && showModal && <AddForm  url={url} onClose={() => setShowModal(false)} />}
+        {!isAccounts && showModal && <AddRecordForm  url={url} onClose={() => setShowModal(false)} />}
 
         
     </>

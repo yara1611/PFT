@@ -1,19 +1,30 @@
 import React from "react";
 import { useState } from "react";
-import { postRegister } from "../Hooks/useFetch";
-import { data } from "autoprefixer";
+import useApi from '../Hooks/useApi';
 function Signup(){
 
     const [name,setName]=useState('');
     const [email,setEmail]=useState('');
     const [user,setUser]=useState('');
     const [pass,setPass]=useState('');
+    const { request } = useApi();
 
 
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-       postRegister(name,user,pass,'https://pft-imqb.onrender.com/auth/register')
-       console.log(name,user,pass);
+    const account = {
+      name: name,
+      username: user,
+      email: email,
+      password: pass,
+    };
+
+    const handleSubmit = async (e)=>{
+    e.preventDefault();
+       const result = await request("POST", 'https://pft-imqb.onrender.com/auth/register', account);
+       if(result) {
+        console.log("Account created successfully:", result);
+        } else {
+          alert("Failed to add account");
+        }
         
     }
     return<>
