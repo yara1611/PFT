@@ -1,7 +1,7 @@
 import useApi from "../Hooks/useApi";
 
 // Refresh and links is not working when deployed on netlify, add a _redirect file
-
+//force this button to redresh the page its used in
 function AddButton({ onClick, account, record, url }) {
    const { loading, error, request } = useApi();
     let result;
@@ -38,7 +38,8 @@ function AddButton({ onClick, account, record, url }) {
         if(record){
             postRecord();
         }
-         if (onClick) onClick(result);
+        if (onClick) onClick(result);
+       
 }
 
   return (

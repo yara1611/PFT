@@ -14,6 +14,10 @@ const { title,url} = props;
         setShowModal(true);
     }
     
+    const handleOnClose = () => {
+        setShowModal(false);
+        window.location.reload();
+    }
     return <>
         <div className='container'>
         <h1 className='text-2xl font-bold text-left mt-5 ml-2'> {title}</h1>
@@ -24,8 +28,8 @@ const { title,url} = props;
         </div>
 
         {/* modal for adding new account */}
-        {isAccounts && showModal && <AddForm  url={url} onClose={() => setShowModal(false)} />}
-        {!isAccounts && showModal && <AddRecordForm  url={url} onClose={() => setShowModal(false)} />}
+        {isAccounts && showModal && <AddForm  url={url} onClose={handleOnClose} />}
+        {!isAccounts && showModal && <AddRecordForm  url={url} onClose={handleOnClose} />}
 
         
     </>

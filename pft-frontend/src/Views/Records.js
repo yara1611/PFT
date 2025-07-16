@@ -9,6 +9,7 @@ we can change this and make it a list view that serves
 both accounts and records and make accounts and records components 
 */
 
+//make delete button
 function Records(){
   // Fetching accounts data from the mock API    
   const { request } = useApi(); // Only need request
@@ -36,7 +37,7 @@ useEffect(() => {
   //This adds a new account to the state without refetching
   const handleRecordAdded = (newRecord) => {
     setRecords((prev) => [...prev, newRecord]);
-    window.location.reload();
+
   };
 
 
