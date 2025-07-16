@@ -15,7 +15,7 @@ function App() {
   return (<div className="relative pb-10 min-h-screen">
 
     <Router>
-      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
+      <Header/>
       <div className="p-3 bg-zinc-100 h-screen">
         <Routes>
           <Route path="/" element={<Home/>} />

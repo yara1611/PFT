@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
 function NavMenu(props) {
-    let { loggedIn} = props;
+    
+    let loggedIn = localStorage.getItem('loggedIn');
     console.log("NavMenu props", props);
     return (
         <nav className="nav-menu">
