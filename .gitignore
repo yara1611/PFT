@@ -1,10 +1,36 @@
+# ======================
+# Global ignores
+# ======================
 HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+.DS_Store
+Thumbs.db
+*.swp
 
-### STS ###
+# ======================
+# VS Code
+# ======================
+.vscode/
+
+# ======================
+# IntelliJ IDEA
+# ======================
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# ======================
+# NetBeans
+# ======================
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/
+
+# ======================
+# STS / Eclipse
+# ======================
 .apt_generated
 .classpath
 .factorypath
@@ -13,21 +39,28 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+# ======================
+# Frontend (React or similar)
+# ======================
+pft-frontend/node_modules/
+pft-frontend/build/
+pft-frontend/.env
+pft-frontend/.parcel-cache/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# ======================
+# Backend (Java / Maven)
+# ======================
+pft-backend/target/
+pft-backend/.mvn/wrapper/maven-wrapper.jar
 
+<<<<<<< HEAD
 ### VS Code ###
 .vscode/
+=======
+
+
+# If NetBeans or Gradle builds in backend:
+pft-backend/build/
+!pft-backend/**/src/main/**/build/
+!pft-backend/**/src/test/**/build/
+>>>>>>> 8c12a02 (frontend folder)
