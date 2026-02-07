@@ -25,8 +25,8 @@ public class AuthenticationController {
     private final UserService userService;
     //form and button
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> addUser(@RequestBody RegisterRequest request){ //@RequestBody -> in body
-        System.out.println("⏺ Register request received for: " + request.getUsername());
+    public ResponseEntity<AuthenticationResponse> addUser(@RequestBody RegisterRequest request){
+        System.out.println("Register request received for: " + request.getUsername());
 
 
                 return ResponseEntity.ok(authService.register(request));
@@ -38,7 +38,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request){ //@RequestBody -> in body
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request){
         return ResponseEntity.ok(authService.authenticate(request));
     }
 

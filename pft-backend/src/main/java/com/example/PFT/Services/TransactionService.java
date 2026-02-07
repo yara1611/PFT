@@ -23,7 +23,7 @@ public class TransactionService {
         transactionRepository.save(transaction);
     }
 
-    public double revertTransaction(Long accountID){
+    public double lastTransaction(Long accountID){
         List<Transaction> transactions = transactionRepository.findTransactionsByAccount(accountID);
         try{
             Transaction lastTransaction = transactions.get(transactions.size()-1);

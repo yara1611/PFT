@@ -6,6 +6,7 @@ import com.example.PFT.Models.enums.TransactionType;
 import com.example.PFT.Models.User;
 import com.example.PFT.Repositories.AccountRepository;
 import com.example.PFT.Repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -25,8 +26,7 @@ public class AccountService {
 
     //TODO:make DTOs
     public void addAccount(User user,Double balance, String name){
-//        User user = Optional.ofNullable(userRepository.findUserByUsername(username))
-//                .orElseThrow(() -> new IllegalStateException("User not found"));
+
         Account account=new Account();
         account.setName(name==null? "New Account":name);
         account.setUser(user);
@@ -54,7 +54,7 @@ public class AccountService {
             account.setBalance(account.getBalance()-amount);
         }
 
-       //make a logger later
+       //TODO make a logger later
         System.out.println("LOG:");
 
        //TODO add category
@@ -73,13 +73,14 @@ public class AccountService {
          return account.getBalance().toString();
     }
 
-    public void revertT(Long accountID){
-        double bal = transactionService.revertTransaction(accountID);
+    @Transactional
+    public void revertTransaction(Long accountID){
+        double bal = transactionService.lastTransaction(accountID);
         Account account = accountRepository.findById(accountID)
                 .orElseThrow(() -> new IllegalStateException("Account with id: " + accountID + " is not found"));
         account.setBalance(account.getBalance()+bal);
         transactionService.logTransaction(new Transaction(account,bal,TransactionType.REVERT));
-        accountRepository.save(account);
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.PFT.Controllers;
 
+import com.example.PFT.Models.Dtos.ResponseDto;
 import com.example.PFT.Models.Transaction;
 import com.example.PFT.Models.User;
 import com.example.PFT.Models.enums.TransactionType;
@@ -35,33 +36,36 @@ public class AccountController {
         accountService.addAccount(userService.getCurrentUser(),balance, name);
         return ResponseEntity.ok().body("Account \""+name+"\" is successfully added account to user "+user.getUsername());
     }
+
     @PutMapping("/makeDeposit")
-    public ResponseEntity<Map<String, Object>> deposit(@RequestParam Long id, @RequestParam Double amount) {
-        Map<String, Object> response = new HashMap<>();
+    public ResponseEntity<ResponseDto> deposit(@RequestParam Long id, @RequestParam Double amount) {
+        ResponseDto response = new ResponseDto();
         try {
             accountService.makeDeposit(id, amount, TransactionType.DEPOSIT);
-            response.put("status", "success");
-            response.put("balance", accountService.displayBalance(id)); // Assuming it returns balance
+
+            response.setStatus("Success");
+            response.setMessage(accountService.displayBalance(id)); // Assuming it returns balance
+
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
-            response.put("status", "error");
-            response.put("message", e.getMessage());
+            response.setStatus("Error");
+            response.setMessage(e.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
     }
 
 
     @PutMapping("/withdraw")
-    public ResponseEntity<Map<String, Object>> withdraw(@RequestParam Long id, @RequestParam Double amount) {
-        Map<String, Object> response = new HashMap<>();
+    public ResponseEntity<ResponseDto> withdraw(@RequestParam Long id, @RequestParam Double amount) {
+        ResponseDto response = new ResponseDto();
         try {
             accountService.makeDeposit(id, amount, TransactionType.WITHDRAW);
-            response.put("status", "success");
-            response.put("balance", accountService.displayBalance(id)); // Assuming it returns balance
+            response.setStatus("Success");
+            response.setMessage(accountService.displayBalance(id)); // Assuming it returns balance
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
-            response.put("status", "error");
-            response.put("message", e.getMessage());
+            response.setStatus("Error");
+            response.setMessage(e.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
     }
@@ -80,9 +84,9 @@ public class AccountController {
     }
 
     @Tag(name="Admin")
-    @GetMapping("/revertTransaction")
+    @GetMapping("/lastTransaction")
     public ResponseEntity<String> revertTransaction(@RequestParam Long id){
-         accountService.revertT(id);
+         accountService.revertTransaction(id);
         return ResponseEntity.ok().body("Transaction successfully reverted.");
     }
 
