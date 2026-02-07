@@ -20,6 +20,13 @@ public class JwtService {
 
     //@Value("${secret.key}")
     private static String SECRET_KEY = "P4X2m8NqgW0HDBGnaMNCFxBXP5zFRReFgvvMHW36YovnBJQBLuBZdAagthqpC0wwrKMXP1fiDIJoZu/BPaAgcAQeXJQjK+ynKSVzU2Oztl7oVA0Xs2UrxdR7FPxPleL2eQVjHmst1tMmx+MTWTua4XPIaNl5eMM0uUz7R+AFSPQR/unuwIV8KD8xvI9AM5CrJVL0vDMDqyOxuMIQc1FYiq7VLMGO4zkJdyUp7nHZNuPxOcHGY9cVOGsgbv06gKuKMRLCjTzu18navfnzkitvU1re0gP2NINQj0YZadLEFQVuTfpnsPkaLfpPzVGDUecSW4ZtMnMSVgq07Tev0q0+Tit1mSfhOr1Hmt5A7CxsLLI=";
+
+    //EXTRACTIONS//
+
+    private Date extractExpiration(String token) {
+        return extractClaim(token,Claims::getExpiration);
+    }
+
     public String extractUsername(String token) {
         return extractClaim(token,Claims::getSubject);
     }
@@ -30,30 +37,50 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
+    private Claims extractAllClaims(String token){
+        return Jwts
+                .parserBuilder()
+                .setSigningKey(getSignInKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    private Key getSignInKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    //GENERATIONS//
+
+    //generate a token
+    public String generateToken(Map<String,Object> extraClaims, UserDetails userDetails){
+        return Jwts
+                .builder()
+                .setClaims(extraClaims)
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis()*1000*60*24))
+                .signWith(getSignInKey())
+                .compact();
+    }
+
     //w/o extra claims
     public String generateToken(UserDetails userDetails){
         return generateToken(new HashMap<>(),userDetails);
     }
 
-    //generate a token
-    public String generateToken(Map<String,Object> extraClaims, UserDetails userDetails){
-        return Jwts.builder().setClaims(extraClaims)
-                .setSubject(userDetails.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+1000*60*24))
-                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
-                .compact();
-    }
+//    //TODO: use this
+//    public String generateJwtTokenForgotPwd(String username){
+//        return Jwts.builder()
+//                .setSubject(username)
+//                .setIssuedAt(new Date())
+//                .setExpiration(new Date((new Date()).getTime() + 1000*120))
+//                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+//                .compact();
+//    }
 
-    //TODO: use this
-    public String generateJwtTokenForgotPwd(String username){
-        return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + 1000*120))
-                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
-                .compact();
-    }
+    //CHECKS//
 
     //Validate a token
     public boolean isTokenValid(String token, UserDetails userDetails){
@@ -65,24 +92,6 @@ public class JwtService {
         return extractExpiration(token).before(new Date());
     }
 
-    private Date extractExpiration(String token) {
-        return extractClaim(token,Claims::getExpiration);
-    }
-
-    //todo: what are claims
-    private Claims extractAllClaims(String token){
-        return Jwts
-                .parserBuilder()
-                .setSigningKey(getSignInKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-    }
-
-    private Key getSignInKey() {
-        byte[] keyByte = Decoders.BASE64.decode(SECRET_KEY);
-        return Keys.hmacShaKeyFor(keyByte);
-    }
 }
 
 

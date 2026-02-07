@@ -5,6 +5,7 @@ import com.example.PFT.Models.Dtos.EditUserRequest;
 import com.example.PFT.Models.Dtos.UserDTO;
 import com.example.PFT.Models.User;
 import com.example.PFT.Repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +30,7 @@ public class UserService {
         User user = userRepository.findById(userId).orElseThrow(()->new IllegalStateException("User is not found"));
         userRepository.delete(user);
     }
+
 
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -59,6 +61,7 @@ public class UserService {
         String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
         return password != null && password.matches(regex);
     }
+
 
     public void editUser(User currentUser, EditUserRequest updatedUser) {
         try {

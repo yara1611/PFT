@@ -26,15 +26,13 @@ public class AuthenticationService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private JwtService jwtService;
-    @Autowired
-    private UserService userService;
+
 
     /*Note: coordinator where u can register multiple providers
      and based on request type it'll deliver an authentication request to the correct provider*/
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
-        //TODO: i think move checkPass to Front-End
         if (userRepository.findUserByUsername(request.getUsername()).isPresent()) {
             throw new UserAlreadyExistsException("Username already exists");
         }
@@ -46,17 +44,22 @@ public class AuthenticationService {
                 .role(Role.USER) //.role(request.getRole())
                 .build();
         userRepository.save(user);
+
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
-                .token(jwtToken).build();
+        return AuthenticationResponse
+                .builder()
+                .token(jwtToken)
+                .build();
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword()));
         var user = userRepository.findUserByUsername(request.getUsername()).orElseThrow(()->new UsernameNotFoundException("User not found")); //add exception
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
-                .token(jwtToken).build();
+        return AuthenticationResponse
+                .builder()
+                .token(jwtToken)
+                .build();
     }
 
 }

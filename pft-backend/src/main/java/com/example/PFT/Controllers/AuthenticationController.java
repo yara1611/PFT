@@ -27,12 +27,7 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> addUser(@RequestBody RegisterRequest request){
         System.out.println("Register request received for: " + request.getUsername());
-
-
-                return ResponseEntity.ok(authService.register(request));
-
-
-
+        return ResponseEntity.ok(authService.register(request));
         //request.getUsername()
 
     }
