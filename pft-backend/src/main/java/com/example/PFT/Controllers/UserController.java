@@ -22,13 +22,13 @@ public class UserController {
     @Autowired
     private AccountService accountService;
 
-    @PutMapping("/editUser")
+    @PatchMapping("/editUser")
     public ResponseEntity<String> editUser(@RequestBody EditUserRequest newUser){
         userService.editUser(userService.getCurrentUser(),newUser);
         return ResponseEntity.ok().body("User \""+newUser.getUsername()+"\" is successfully updated");
     }
 
-    @PutMapping("/changePassword")
+    @PatchMapping("/changePassword")
     public ResponseEntity<String> editUser(@RequestBody ChangePasswordRequest request){
         userService.changePassword(request);
         return ResponseEntity.ok().body("Password is successfully updated");

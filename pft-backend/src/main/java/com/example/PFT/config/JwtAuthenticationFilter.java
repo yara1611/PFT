@@ -17,7 +17,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-//TODO 2: SETUP Filter
 
 //a bean
 @Component

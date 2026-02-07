@@ -25,7 +25,7 @@ public class AdminController {
         return ResponseEntity.ok("Hello User");
     }
 
-    @GetMapping("admin")
+    @GetMapping("/admin")
     public ResponseEntity<String> sayHelloAdmin(){
         return ResponseEntity.ok("Hello Admin");
     }

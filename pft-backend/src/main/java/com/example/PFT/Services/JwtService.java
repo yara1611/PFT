@@ -19,7 +19,10 @@ import java.util.function.Function;
 public class JwtService {
 
     //@Value("${secret.key}")
-    private static String SECRET_KEY = "P4X2m8NqgW0HDBGnaMNCFxBXP5zFRReFgvvMHW36YovnBJQBLuBZdAagthqpC0wwrKMXP1fiDIJoZu/BPaAgcAQeXJQjK+ynKSVzU2Oztl7oVA0Xs2UrxdR7FPxPleL2eQVjHmst1tMmx+MTWTua4XPIaNl5eMM0uUz7R+AFSPQR/unuwIV8KD8xvI9AM5CrJVL0vDMDqyOxuMIQc1FYiq7VLMGO4zkJdyUp7nHZNuPxOcHGY9cVOGsgbv06gKuKMRLCjTzu18navfnzkitvU1re0gP2NINQj0YZadLEFQVuTfpnsPkaLfpPzVGDUecSW4ZtMnMSVgq07Tev0q0+Tit1mSfhOr1Hmt5A7CxsLLI=";
+    private final String SECRET_KEY;
+    public JwtService(@Value("${secret.key}") String secretKey) {
+        this.SECRET_KEY = secretKey;
+    }
 
     //EXTRACTIONS//
 
@@ -60,7 +63,7 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()*1000*60*24))
+                .setExpiration(new Date(System.currentTimeMillis()+1000*60*24))
                 .signWith(getSignInKey())
                 .compact();
     }

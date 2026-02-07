@@ -31,10 +31,9 @@ public class UserService {
         userRepository.delete(user);
     }
 
-
     public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return (User) authentication.getPrincipal();
+        return (User) authentication.getPrincipal(); //get authenticated users details
     }
 
     public UserDTO getUser(){
@@ -63,6 +62,7 @@ public class UserService {
     }
 
 
+    @Transactional
     public void editUser(User currentUser, EditUserRequest updatedUser) {
         try {
             currentUser.setUsername(updatedUser.getUsername());
@@ -70,22 +70,21 @@ public class UserService {
             /* existingUser.setEmail(updatedUser.getEmail());
              * existingUser.setRoles(updatedUser.getRoles()); //If roles exist in your user model
              */
-            userRepository.save(currentUser);
         }
         catch (IllegalStateException e){
-            e.getLocalizedMessage();
+            throw new RuntimeException("Failed to update user", e);
         }
 
 
     }
 
+    @Transactional
     public void changePassword(ChangePasswordRequest request){
         User currentUser = getCurrentUser();
         if (!passwordEncoder.matches(request.getOldPassword(), currentUser.getPassword())) {
             throw new IllegalArgumentException("Old password is incorrect.");
         }
         currentUser.setPassword(passwordEncoder.encode(request.getNewPassword()));
-        userRepository.save(currentUser);
     }
 
 }
