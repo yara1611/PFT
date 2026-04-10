@@ -1,11 +1,24 @@
-<h1>Personal Finance Tracker</h1>
-<h2>Features:</h2>
-<li>Deposit/Withdraw Money</li>
-<li>Logged Transactions</li>
-<li>Revert The Most Recent Transaction</li>
-<li>Add/Delete Multiple Accounts</li>
-<hr>
-<h2>Tools:</h2>
-<li>Java Spring boot Framework</li>
-<li>H2 Database</li>
-<li>Swagger-UI</li>
+# Personal Finance Tracker (PFT)
+
+A REST API for personal finance management built with Java Spring Boot.
+
+## Features
+- Deposit and withdraw money across multiple accounts
+- Full transaction history logging
+- Revert the most recent transaction
+- Create and delete multiple accounts
+
+## Tech Stack
+- Java, Spring Boot
+- H2 Database (in-memory)
+- Swagger UI for API documentation
+
+## Running the Project
+```bash
+cd pft-backend
+./mvnw spring-boot:run
+```
+API docs available at: `http://localhost:8080/swagger-ui.html`
+
+## Status
+In active development.
