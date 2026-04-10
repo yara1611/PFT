@@ -3,6 +3,7 @@ package com.example.PFT.Controllers;
 import com.example.PFT.Models.Account;
 import com.example.PFT.Models.Dtos.ChangePasswordRequest;
 import com.example.PFT.Models.Dtos.EditUserRequest;
+import com.example.PFT.Models.User;
 import com.example.PFT.Services.AccountService;
 import com.example.PFT.Services.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -45,4 +46,8 @@ public class UserController {
         return accountService.getAllAccounts(userService.getCurrentUser());
     }
 
+    @GetMapping("/CurrentUser")
+    public ResponseEntity<User> getCurrentUser(){
+        return ResponseEntity.ok(userService.getCurrentUser());
+    }
 }

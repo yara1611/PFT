@@ -19,6 +19,8 @@ public class AccountService {
     private UserRepository userRepository;
     @Autowired
     private TransactionService transactionService;
+    @Autowired
+    private UserService userService;
 
     public List<Account> getAllAccounts(){
         return accountRepository.findAll();
@@ -68,8 +70,14 @@ public class AccountService {
     }
 
     public String displayBalance(Long accountID){
+        User user = userService.getCurrentUser();
+
          Account account = accountRepository.findById(accountID)
                 .orElseThrow(() -> new IllegalStateException("Account with id: " + accountID + " is not found"));
+         if(!user.getAccount().contains(account))
+         {
+             throw new IllegalStateException("Not Allowed");
+         }
          return account.getBalance().toString();
     }
 
