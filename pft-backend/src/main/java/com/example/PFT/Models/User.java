@@ -30,7 +30,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
     @JsonManagedReference
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER ,cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<Account> account;
 
     @Enumerated(EnumType.STRING)

@@ -8,7 +8,11 @@ import com.example.PFT.Repositories.AccountRepository;
 import com.example.PFT.Repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 @Service
@@ -72,12 +76,8 @@ public class AccountService {
     public String displayBalance(Long accountID){
         User user = userService.getCurrentUser();
 
-         Account account = accountRepository.findById(accountID)
-                .orElseThrow(() -> new IllegalStateException("Account with id: " + accountID + " is not found"));
-         if(!user.getAccount().contains(account))
-         {
-             throw new IllegalStateException("Not Allowed");
-         }
+        Account account = accountRepository.findByAccountIdAndUser(accountID, user)
+                .orElseThrow(() -> new AccessDeniedException("Account not found or access denied"));
          return account.getBalance().toString();
     }
 
