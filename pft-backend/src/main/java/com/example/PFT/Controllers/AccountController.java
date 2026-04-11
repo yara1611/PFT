@@ -38,7 +38,7 @@ public class AccountController {
         return ResponseEntity.ok().body("Account \""+name+"\" is successfully added account to user "+user.getUsername());
     }
 
-    @PutMapping("/{id}/deposit")
+    @PostMapping("/{id}/deposit")
     public ResponseEntity<ResponseDto> deposit(@PathVariable Long id, @RequestParam Double amount) {
         ResponseDto response = new ResponseDto();
         try {
@@ -56,7 +56,7 @@ public class AccountController {
     }
 
 
-    @PutMapping("/{id}/withdraw")
+    @PostMapping("/{id}/withdraw")
     public ResponseEntity<ResponseDto> withdraw(@PathVariable Long id, @RequestParam Double amount) {
         ResponseDto response = new ResponseDto();
         try {
