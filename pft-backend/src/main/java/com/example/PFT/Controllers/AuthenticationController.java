@@ -2,7 +2,7 @@ package com.example.PFT.Controllers;
 
 
 import com.example.PFT.Models.Dtos.AuthenticationRequest;
-import com.example.PFT.Models.AuthenticationResponse;
+import com.example.PFT.Models.Dtos.AuthenticationResponse;
 import com.example.PFT.Models.Dtos.RegisterRequest;
 import com.example.PFT.Services.AuthenticationService;
 import com.example.PFT.Services.UserService;

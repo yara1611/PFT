@@ -1,8 +1,6 @@
 package com.example.PFT.Models;
 
-import com.example.PFT.Models.enums.TransactionType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.example.PFT.Models.enums.AccountType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,18 +23,17 @@ public class Account {
     @Column
     private String name;
 
-    @JsonBackReference
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     @Column
     private Double balance;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "account", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Transaction> transactions;
     @Column
-    private AccessType accountType;
+    private AccountType accountType;
 
 
 }
