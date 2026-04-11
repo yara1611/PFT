@@ -31,15 +31,15 @@ public class AccountController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/addAccount")
+    @PostMapping("/")
     public ResponseEntity<String> addAccount(@RequestParam Double balance, @RequestParam(required = false) String name){
         User user = userService.getCurrentUser();
         accountService.addAccount(userService.getCurrentUser(),balance, name);
         return ResponseEntity.ok().body("Account \""+name+"\" is successfully added account to user "+user.getUsername());
     }
 
-    @PutMapping("/makeDeposit")
-    public ResponseEntity<ResponseDto> deposit(@RequestParam Long id, @RequestParam Double amount) {
+    @PutMapping("/{id}/deposit")
+    public ResponseEntity<ResponseDto> deposit(@PathVariable Long id, @RequestParam Double amount) {
         ResponseDto response = new ResponseDto();
         try {
             accountService.makeDeposit(id, amount, TransactionType.DEPOSIT);
@@ -56,8 +56,8 @@ public class AccountController {
     }
 
 
-    @PutMapping("/withdraw")
-    public ResponseEntity<ResponseDto> withdraw(@RequestParam Long id, @RequestParam Double amount) {
+    @PutMapping("/{id}/withdraw")
+    public ResponseEntity<ResponseDto> withdraw(@PathVariable Long id, @RequestParam Double amount) {
         ResponseDto response = new ResponseDto();
         try {
             accountService.makeDeposit(id, amount, TransactionType.WITHDRAW);
@@ -73,27 +73,27 @@ public class AccountController {
 
     //displays balance of account with entered id not of the current user
     //so if user has access to id of another users account it can see it
-    @GetMapping("/displayBalance")
-    public String displayBalance(@RequestParam Long accountId){
+    @GetMapping("/{id}/balance")
+    public String displayBalance(@PathVariable Long accountId){
         return accountService.displayBalance(accountId);
     }
 
     @Tag(name="Admin")
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/allTransactions")
-    public ResponseEntity<List<Transaction>> getTransactions(@RequestParam Long accountId){
+    @GetMapping("/{id}/transactions")
+    public ResponseEntity<List<Transaction>> getTransactions(@PathVariable Long accountId){
         return ResponseEntity.ok().body(transactionService.getAllTransactions(accountId));
     }
 
     @Tag(name="Admin")
-    @GetMapping("/lastTransaction")
-    public ResponseEntity<String> revertTransaction(@RequestParam Long id){
+    @GetMapping("/{id}/transactions/last")
+    public ResponseEntity<String> revertTransaction(@PathVariable Long id){
          accountService.revertTransaction(id);
         return ResponseEntity.ok().body("Transaction successfully reverted.");
     }
 
-    @DeleteMapping("/deleteAccount")
-    public ResponseEntity<String> deleteAccount(@RequestParam Long id){
+    @DeleteMapping("/accounts/{id}")
+    public ResponseEntity<String> deleteAccount(@PathVariable Long id){
         accountService.deleteAccount(id);
         return ResponseEntity.ok().body("Account successfully deleted.");
     }

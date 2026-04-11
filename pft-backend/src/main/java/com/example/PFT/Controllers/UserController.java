@@ -23,30 +23,30 @@ public class UserController {
     @Autowired
     private AccountService accountService;
 
-    @PatchMapping("/editUser")
+    @PatchMapping("/me")
     public ResponseEntity<String> editUser(@RequestBody EditUserRequest newUser){
         userService.editUser(userService.getCurrentUser(),newUser);
         return ResponseEntity.ok().body("User \""+newUser.getUsername()+"\" is successfully updated");
     }
 
-    @PatchMapping("/changePassword")
-    public ResponseEntity<String> editUser(@RequestBody ChangePasswordRequest request){
+    @PatchMapping("/me/password")
+    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordRequest request){
         userService.changePassword(request);
         return ResponseEntity.ok().body("Password is successfully updated");
     }
 
-    @DeleteMapping("/deleteUser")
-    public ResponseEntity<String> deleteUser(@RequestParam Long userId){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long userId){
         userService.deleteUser(userId);
         return ResponseEntity.ok().body("User successfully deleted");
     }
     //TODO:should this be here??
-    @GetMapping("/allUserAccounts")
+    @GetMapping("/me/accounts")
     public List<Account> allAccounts(){
         return accountService.getAllAccounts(userService.getCurrentUser());
     }
 
-    @GetMapping("/CurrentUser")
+    @GetMapping("/me")
     public ResponseEntity<User> getCurrentUser(){
         return ResponseEntity.ok(userService.getCurrentUser());
     }
