@@ -1,7 +1,7 @@
 package com.example.PFT.Services;
 
 import com.example.PFT.Models.Account;
-import com.example.PFT.Models.Dtos.AccountDto;
+import com.example.PFT.Models.DTOs.AccountDto;
 import com.example.PFT.Models.Transaction;
 import com.example.PFT.Models.enums.TransactionType;
 import com.example.PFT.Models.User;
@@ -9,10 +9,8 @@ import com.example.PFT.Repositories.AccountRepository;
 import com.example.PFT.Repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;

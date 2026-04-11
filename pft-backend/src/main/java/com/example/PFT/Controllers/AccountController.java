@@ -1,8 +1,7 @@
 package com.example.PFT.Controllers;
 
-import com.example.PFT.Models.Dtos.ResponseDto;
-import com.example.PFT.Models.Dtos.TransactionResponseDto;
-import com.example.PFT.Models.Transaction;
+import com.example.PFT.Models.DTOs.ResponseDto;
+import com.example.PFT.Models.DTOs.TransactionDto;
 import com.example.PFT.Models.User;
 import com.example.PFT.Models.enums.TransactionType;
 import com.example.PFT.Services.AccountService;
@@ -14,9 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/accounts")
@@ -82,7 +80,7 @@ public class AccountController {
     @Tag(name="Admin")
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}/transactions")
-    public ResponseEntity<List<TransactionResponseDto>> getTransactions(@PathVariable Long id){
+    public ResponseEntity<List<TransactionDto>> getTransactions(@PathVariable Long id){
         return ResponseEntity.ok(transactionService.getAllTransactions(id));
     }
 

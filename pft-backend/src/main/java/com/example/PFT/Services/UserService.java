@@ -1,8 +1,8 @@
 package com.example.PFT.Services;
 
-import com.example.PFT.Models.Dtos.ChangePasswordRequest;
-import com.example.PFT.Models.Dtos.EditUserRequest;
-import com.example.PFT.Models.Dtos.UserDTO;
+import com.example.PFT.Models.DTOs.ChangePasswordRequest;
+import com.example.PFT.Models.DTOs.EditUserRequest;
+import com.example.PFT.Models.DTOs.UserDto;
 import com.example.PFT.Models.User;
 import com.example.PFT.Repositories.UserRepository;
 import jakarta.transaction.Transactional;
@@ -36,10 +36,10 @@ public class UserService {
         return (User) authentication.getPrincipal(); //get authenticated users details
     }
 
-    public UserDTO getUser(){
+    public UserDto getUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = (User) authentication.getPrincipal(); //NOTE: commonly used in Spring Security to get the currently authenticated user's details.
-        return new UserDTO(
+        return new UserDto(
                 currentUser.getUsername(),
                 currentUser.getEmail(),
                 currentUser.getName(),

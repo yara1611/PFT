@@ -1,9 +1,9 @@
 package com.example.PFT.Controllers;
 
 
-import com.example.PFT.Models.Dtos.AuthenticationRequest;
-import com.example.PFT.Models.Dtos.AuthenticationResponse;
-import com.example.PFT.Models.Dtos.RegisterRequest;
+import com.example.PFT.Models.DTOs.AuthenticationRequest;
+import com.example.PFT.Models.DTOs.AuthenticationResponse;
+import com.example.PFT.Models.DTOs.RegisterRequest;
 import com.example.PFT.Services.AuthenticationService;
 import com.example.PFT.Services.UserService;
 import lombok.RequiredArgsConstructor;

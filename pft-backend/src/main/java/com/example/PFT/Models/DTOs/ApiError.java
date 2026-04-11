@@ -1,4 +1,4 @@
-package com.example.PFT.Models.Dtos;
+package com.example.PFT.Models.DTOs;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;

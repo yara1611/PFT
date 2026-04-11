@@ -1,7 +1,6 @@
 package com.example.PFT.Controllers;
 
-import com.example.PFT.Models.Dtos.UserDTO;
-import com.example.PFT.Models.User;
+import com.example.PFT.Models.DTOs.UserDto;
 import com.example.PFT.Services.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,14 +31,14 @@ public class AdminController {
     }
 
     @GetMapping("/allUsers")
-    public List<UserDTO> getUsers(){
+    public List<UserDto> getUsers(){
         return userService.getUsers().stream().map(u-> new
-                UserDTO(u.getUsername(),u.getEmail(),u.getName(),u.getRole().name()))
+                        UserDto(u.getUsername(),u.getEmail(),u.getName(),u.getRole().name()))
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/currentUser")
-    public ResponseEntity<UserDTO> getCurrentUser(){
+    public ResponseEntity<UserDto> getCurrentUser(){
         return ResponseEntity.ok(userService.getUser());
     }
 }

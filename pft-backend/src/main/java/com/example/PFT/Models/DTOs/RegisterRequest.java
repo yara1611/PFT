@@ -1,4 +1,4 @@
-package com.example.PFT.Models.Dtos;
+package com.example.PFT.Models.DTOs;
 
 import com.example.PFT.Models.enums.Role;
 import lombok.AllArgsConstructor;

@@ -1,9 +1,9 @@
 package com.example.PFT.Controllers;
 
-import com.example.PFT.Models.Account;
-import com.example.PFT.Models.Dtos.AccountDto;
-import com.example.PFT.Models.Dtos.ChangePasswordRequest;
-import com.example.PFT.Models.Dtos.EditUserRequest;
+import com.example.PFT.Models.DTOs.AccountDto;
+import com.example.PFT.Models.DTOs.ChangePasswordRequest;
+import com.example.PFT.Models.DTOs.EditUserRequest;
+import com.example.PFT.Models.DTOs.UserDto;
 import com.example.PFT.Models.User;
 import com.example.PFT.Services.AccountService;
 import com.example.PFT.Services.UserService;
@@ -37,8 +37,8 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable Long userId){
-        userService.deleteUser(userId);
+    public ResponseEntity<String> deleteUser(@PathVariable Long id){
+        userService.deleteUser(id);
         return ResponseEntity.ok().body("User successfully deleted");
     }
     //TODO:should this be here??
@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<User> getCurrentUser(){
-        return ResponseEntity.ok(userService.getCurrentUser());
+    public ResponseEntity<UserDto> getCurrentUser(){
+        return ResponseEntity.ok(userService.getUser());
     }
 }

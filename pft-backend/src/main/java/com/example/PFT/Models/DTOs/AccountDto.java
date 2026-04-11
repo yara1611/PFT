@@ -1,4 +1,4 @@
-package com.example.PFT.Models.Dtos;
+package com.example.PFT.Models.DTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

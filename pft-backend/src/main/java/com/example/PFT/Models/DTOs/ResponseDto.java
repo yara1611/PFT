@@ -1,15 +1,13 @@
-package com.example.PFT.Models.Dtos;
+package com.example.PFT.Models.DTOs;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse {
-
-    private String token;
+public class ResponseDto {
+    private String status;
+    private Object message;
 }

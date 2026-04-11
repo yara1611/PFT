@@ -1,6 +1,6 @@
 package com.example.PFT.Exceptions;
 
-import com.example.PFT.Models.Dtos.ApiError;
+import com.example.PFT.Models.DTOs.ApiError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

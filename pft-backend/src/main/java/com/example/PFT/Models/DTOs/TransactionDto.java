@@ -1,4 +1,4 @@
-package com.example.PFT.Models.Dtos;
+package com.example.PFT.Models.DTOs;
 
 import com.example.PFT.Models.enums.TransactionType;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransactionResponseDto {
+public class TransactionDto {
     private Long transactionId;
     private Double amount;
     private TransactionType transactionType;

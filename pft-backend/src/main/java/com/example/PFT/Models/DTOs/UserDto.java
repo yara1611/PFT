@@ -1,4 +1,4 @@
-package com.example.PFT.Models.Dtos;
+package com.example.PFT.Models.DTOs;
 
 import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
+public class UserDto {
     private String username;
     @Null
     private String email;

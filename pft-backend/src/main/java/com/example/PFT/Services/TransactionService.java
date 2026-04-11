@@ -1,13 +1,12 @@
 package com.example.PFT.Services;
 
-import com.example.PFT.Models.Dtos.TransactionResponseDto;
+import com.example.PFT.Models.DTOs.TransactionDto;
 import com.example.PFT.Models.Transaction;
 import com.example.PFT.Models.enums.TransactionType;
 import com.example.PFT.Repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,8 +44,8 @@ public class TransactionService {
 //    }
 
     //MAPPING
-    public TransactionResponseDto toTransactionDto(Transaction transaction) {
-        return new TransactionResponseDto(
+    public TransactionDto toTransactionDto(Transaction transaction) {
+        return new TransactionDto(
                 transaction.getTransactionId(),
                 transaction.getAmount(),
                 transaction.getTransactionType(),
@@ -54,7 +53,7 @@ public class TransactionService {
         );
     }
 
-    public List<TransactionResponseDto> getAllTransactions(Long id) {
+    public List<TransactionDto> getAllTransactions(Long id) {
         return transactionRepository.findTransactionsByAccount(id)
                 .stream()
                 .map(this::toTransactionDto)
