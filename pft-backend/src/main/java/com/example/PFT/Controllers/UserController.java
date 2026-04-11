@@ -1,6 +1,7 @@
 package com.example.PFT.Controllers;
 
 import com.example.PFT.Models.Account;
+import com.example.PFT.Models.Dtos.AccountDto;
 import com.example.PFT.Models.Dtos.ChangePasswordRequest;
 import com.example.PFT.Models.Dtos.EditUserRequest;
 import com.example.PFT.Models.User;
@@ -42,7 +43,7 @@ public class UserController {
     }
     //TODO:should this be here??
     @GetMapping("/me/accounts")
-    public List<Account> allAccounts(){
+    public List<AccountDto> allAccounts(){
         return accountService.getAllAccounts(userService.getCurrentUser());
     }
 

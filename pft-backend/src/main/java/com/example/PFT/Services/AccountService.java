@@ -1,6 +1,7 @@
 package com.example.PFT.Services;
 
 import com.example.PFT.Models.Account;
+import com.example.PFT.Models.Dtos.AccountDto;
 import com.example.PFT.Models.Transaction;
 import com.example.PFT.Models.enums.TransactionType;
 import com.example.PFT.Models.User;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountService {
@@ -40,9 +42,9 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public List<Account> getAllAccounts(User user){
-        return accountRepository.findAccountsByUser(user.getUserId());
-    }
+//    public List<Account> getAllAccounts(User user){
+//        return accountRepository.findAccountsByUser(user.getUserId());
+//    }
 
     //TODO:Change Name
     public void makeDeposit(Long accountID, Double amount,TransactionType type){
@@ -89,6 +91,17 @@ public class AccountService {
         account.setBalance(account.getBalance()+bal);
         transactionService.logTransaction(new Transaction(account,bal,TransactionType.REVERT));
 
+    }
+
+    //MAPPING
+    public AccountDto toAccountDto(Account account){
+        return new AccountDto(account.getAccountId(),account.getName(),account.getBalance());
+    }
+
+    public List<AccountDto> getAllAccounts(User user){
+    return accountRepository.findAccountsByUser(user.getUserId())
+            .stream().map(this::toAccountDto)
+            .collect(Collectors.toList());
     }
 
 }

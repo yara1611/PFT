@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/demo")
@@ -31,8 +32,10 @@ public class AdminController {
     }
 
     @GetMapping("/allUsers")
-    public List<User> getUsers(){
-        return userService.getUsers();
+    public List<UserDTO> getUsers(){
+        return userService.getUsers().stream().map(u-> new
+                UserDTO(u.getUsername(),u.getEmail(),u.getName(),u.getRole().name()))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/currentUser")

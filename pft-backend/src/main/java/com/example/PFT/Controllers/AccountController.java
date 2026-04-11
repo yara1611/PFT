@@ -1,6 +1,7 @@
 package com.example.PFT.Controllers;
 
 import com.example.PFT.Models.Dtos.ResponseDto;
+import com.example.PFT.Models.Dtos.TransactionResponseDto;
 import com.example.PFT.Models.Transaction;
 import com.example.PFT.Models.User;
 import com.example.PFT.Models.enums.TransactionType;
@@ -81,8 +82,8 @@ public class AccountController {
     @Tag(name="Admin")
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/{id}/transactions")
-    public ResponseEntity<List<Transaction>> getTransactions(@PathVariable Long id){
-        return ResponseEntity.ok().body(transactionService.getAllTransactions(id));
+    public ResponseEntity<List<TransactionResponseDto>> getTransactions(@PathVariable Long id){
+        return ResponseEntity.ok(transactionService.getAllTransactions(id));
     }
 
     @Tag(name="Admin")

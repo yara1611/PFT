@@ -1,5 +1,6 @@
 package com.example.PFT.Services;
 
+import com.example.PFT.Models.Dtos.TransactionResponseDto;
 import com.example.PFT.Models.Transaction;
 import com.example.PFT.Models.enums.TransactionType;
 import com.example.PFT.Repositories.TransactionRepository;
@@ -8,15 +9,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
 
-    public List<Transaction> getAllTransactions(Long id){
-        return transactionRepository.findTransactionsByAccount(id);
-    }
+//    public List<Transaction> getAllTransactions(Long id){
+//        return transactionRepository.findTransactionsByAccount(id);
+//    }
 
     public void logTransaction(Transaction transaction){
         System.out.println(transaction.toString());
@@ -38,8 +40,25 @@ public class TransactionService {
     }
 
     //Optimize:Filter transactions by date range
-    public List<Transaction> getAllTransactions(Long id, Date date){
-        return transactionRepository.findTransactionsByDate(id,date);
+//    public List<Transaction> getAllTransactions(Long id, Date date){
+//        return transactionRepository.findTransactionsByDate(id,date);
+//    }
+
+    //MAPPING
+    public TransactionResponseDto toTransactionDto(Transaction transaction) {
+        return new TransactionResponseDto(
+                transaction.getTransactionId(),
+                transaction.getAmount(),
+                transaction.getTransactionType(),
+                transaction.getDate()
+        );
+    }
+
+    public List<TransactionResponseDto> getAllTransactions(Long id) {
+        return transactionRepository.findTransactionsByAccount(id)
+                .stream()
+                .map(this::toTransactionDto)
+                .collect(Collectors.toList());
     }
 
 }
