@@ -32,7 +32,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
-        if (userRepository.findUserByUsername(request.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(request.getUsername()).isPresent()) {
             throw new UserAlreadyExistsException("Username already exists");
         }
 
@@ -53,7 +53,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(),request.getPassword()));
-        var user = userRepository.findUserByUsername(request.getUsername()).orElseThrow(()->new UsernameNotFoundException("User not found")); //add exception
+        var user = userRepository.findByUsername(request.getUsername()).orElseThrow(()->new UsernameNotFoundException("User not found")); //add exception
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse
                 .builder()

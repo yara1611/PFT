@@ -52,7 +52,7 @@ public class UserService {
     }
 
     public User getUserByUsername(String username){
-        return userRepository.findUserByUsername(username).orElseThrow(()->new UsernameNotFoundException("User not found"));
+        return userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("User not found"));
     }
 
     //Todo: add it to register
